@@ -1,30 +1,254 @@
+
 <!DOCTYPE html>
-<html lang="pl">
-    <head>
-        <meta charset="utf-8">
-        <title>Obczaj pogodę!</title>
-        <meta name="Opis" content="Apka tworzona w ramch kusu do obczajania pogody!">
-        <link rel="stylesheet" href="Style.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    </head>
-    <body>     
-        <!-- Input for city  -->
-        <div class="form-group">
-            <label for="exampleInputEmail1">City name: </label>
-            <input class="form-control" id="inputCity" aria-describedby="CityHelp" placeholder="City">
-            <small id="CityHelp" class="form-text text-muted" ></small>
+<html lang="pl-PL">
+
+<head>
+    <meta charset="utf-8">
+    <title>Pogodynka</title>
+    <meta name="description" content="Aktualna prognoza pogody dla Twojego miasta!">
+    <meta name="keywords" content="prognoza pogody, pogoda, temperatura">
+    <meta name="author" content=" ">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Cantora+One|Open+Sans&display=swap" rel="stylesheet"> 
+</head>
+
+<body>
+   
+    <header id="pageHeader">
+        <h1>Pogodynka</h1> 
+    </header>
+    
+    <section id="inputSection">
+       
+        <form class="container justify-content-center">
+            <div class="row">
+                <div id="placeInput" class="dataInput col-sm-6">
+                    <input type="text" placeholder="Twoje miasto">
+                    <button id="placeCheck" class="check"><span class="oi oi-circle-check"></span></button>
+                </div>
+                <div id="dateInput" class="dataInput col-sm-6">
+                    <input type="date">
+                    <button id="dateCheck" class="check"><span class="oi oi-circle-check"></span></button>
+                </div>
+            </div>
+        </form>
+    
+    </section>
+    <div id="inputBar" class="bar">
+            <button id="help"><span class="oi oi-question-mark"></span></button>
+    </div>
+    
+    <main>
+       
+        <div id="messagesBar" class="warning bar">
+            <button id="closeMessages" class="close"><span class="oi oi-circle-x"></span></button>
+        </div>
+        <section id="messages" class="warning">
+        
+        <!--sekcja na ewentualne komunikaty o błędach-->
+          <div class="container">
+              <div class="row">
+                  <div id="typingError" class="col-md-6">
+                      <h4><span class="oi oi-warning"></span> Nazwa miasta została wpisana niepoprawnie</h4>
+                      <p>Nazwa miasta nie powinna zawierać znaków różnych od liter.</p>
+                  </div>
+                  <div id="noPlaceError" class="col-md-6">
+                        <h4><span class="oi oi-warning"></span> Nie mamy danych dla Twojego miasta</h4>
+                        <p>Niestety, nie mamy danych dla Twojego miasta. Spróbuj poszukać prognozy dla innego miasta położonego niedaleko Twojego miejsca zamieszkania.</p>
+                  </div>
+                  <div id="dateError" class="col-md-6">
+                        <h4 ><span class="oi oi-warning"></span> Nie dysponujemy prognozą na wybrany dzień</h4>
+                        <p>Udostępniamy prognozę pogody wyłącznie dla 5 najbliższych dni.</p>
+                  </div>
+                  <div id="untypicalError" class="col-md-6">
+                        <h4><span class="oi oi-warning"></span >Wystąpił niezidentyfikowany błąd</h4>
+                        <p>Spróbuj ponownie.</p>
+                  </div>
+              </div>
+            </div>
+        
+        </section>
+
+        <header id="forecastHeader">
+                <h2>Prognoza szczegółowa</h2>
+                <button id="forecastShowHide"class="showHide"><span class="oi oi-chevron-top"></span></button>
+        </header>
+        <section id="forecast" class="container-fluid">
+           
+            <div class="row">
+           <!---sekcja na prognozę szczegółową (dla jednego dnia)-->
+            </div>
+        
+        </section>
+        <div id="forecastBar" class="bar">
+            <a title="Zmień dane" href="#inputSection"><button class="edit" ><span class="oi oi-pencil"></span></button></a>
+            <button class="info"><span class="oi oi-info"></span></button>
+        </div>
+        
+        <header id="shortForecastHeader">
+                <h2>Prognoza na najbliższe dni</h2>
+                <button><span class="oi oi-chevron-top"></span></button>
+        </header>
+        <section id="shortForecast" class="container-fluid">
+            
+            <!--prognoza skrótowa-->
+            <div class="row justify-content-center">
+                <div id="short1" class="col-sm-4 col-md-3 col-lg-2" >
+                    <figure>
+                        <img src="sun.svg">
+                    </figure>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>temperatura</th>
+                                <td>100</td>
+
+                            </tr>
+                            <tr>
+                                <th>ciśnienie</th>
+                                <td>100</td>
+
+                            </tr>
+                            <tr>
+                                <th>opady</th>
+                                <td>100</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="short2" class="shortForecast col-sm-4 col-md-3 col-lg-2">
+                    <figure>
+                        <img src="sun.svg">
+                    </figure>
+                    <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>temperatura</th>
+                                    <td>100</td>
+        
+                                </tr>
+                                <tr>
+                                    <th>ciśnienie</th>
+                                    <td>100</td>
+        
+                                </tr>
+                                <tr>
+                                    <th>opady</th>
+                                    <td>100</td>
+        
+                                </tr>
+                            </tbody>
+                    </table>
+                </div>
+                <div id="short3" class="shortForecast col-sm-4 col-md-3 col-lg-2">
+                    <figure>
+                        <img src="sun.svg">
+                    </figure>
+                    <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>temperatura</th>
+                                    <td>100</td>
+        
+                                </tr>
+                                <tr>
+                                    <th>ciśnienie</th>
+                                    <td>100</td>
+        
+                                </tr>
+                                <tr>
+                                    <th>opady</th>
+                                    <td>100</td>
+        
+                                </tr>
+                            </tbody>
+                    </table>
+                </div>
+                <div id="short4" class="shortForecast col-sm-4 col-md-3 col-lg-2">
+                    <figure>
+                        <img src="sun.svg">
+                    </figure>
+                    <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>temperatura</th>
+                                    <td>100</td>
+        
+                                </tr>
+                                <tr>
+                                    <th>ciśnienie</th>
+                                    <td>100</td>
+        
+                                </tr>
+                                <tr>
+                                    <th>opady</th>
+                                    <td>100</td>
+        
+                                </tr>
+                            </tbody>
+                    </table>
+                </div>
+                <div id="short5" class="shortForecast col-sm-4 col-md-3 col-lg-2">
+                    <figure>
+                        <img src="sun.svg">
+                    </figure>
+                    <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>temperatura</th>
+                                    <td>100</td>
+        
+                                </tr>
+                                <tr>
+                                    <th>ciśnienie</th>
+                                    <td>100</td>
+        
+                                </tr>
+                                <tr>
+                                    <th>opady</th>
+                                    <td>100</td>
+        
+                                </tr>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        
+        </section>
+        <div id="shortForecastBar" class="bar">
+            <a title="Zmień dane" href="#inputSection"><button ><span class="oi oi-pencil"></span></button></a>
+            <button ><span class="oi oi-info"></span></button>
+        </div>
+       
+        <header id="chartsHeader">
+                <h2>Wykresy</h2>
+                <button><span class="oi oi-chevron-top"></span></button>
+        </header>
+        <section id="charts" class="container-fluid"> 
+            <!--wykresy-->
+        </section>
+        <div id="chartsBar" class="bar">
+            <a title="Zmień dane" href="#inputSection"><button><span class="oi oi-pencil"></span></button></a>
+            <button><span class="oi oi-info"></span></button>
         </div>
 
+    </main>
+    
+    <footer class="fixed-bottom">
+        Pogodynka. Wykonano przez..
+    </footer>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+    <script src="APICommunication.js"></script>
+ </body>
 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-        </script>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        
-        <script src="main.js"></script>
-        <script src="APICommunication.js"></script>
-    </body>
 </html>
+
+
