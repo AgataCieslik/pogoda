@@ -21,8 +21,6 @@ async function Getdata(APIpromise){
     var code = [];
     const values = [];
     const body = document.querySelector('body');
-
-    body.style.background = "gray";
     await fetch(APIpromise)
         .then( response => response.json())
         .then (APIdata => {

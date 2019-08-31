@@ -72,6 +72,10 @@ section{
 .warning{
     background:var(--warn-color);
     padding-top:0;
+    display:none;
+}
+.warning>div{
+    display:none;
 }
 .bar.warning{
     padding-bottom:0;
