@@ -1,10 +1,10 @@
 :root{
     --bg-color1:rgba(246, 246, 248, 0.5);
-    --warn-color:rgba(38, 38, 39, 0.151);
+    --warn-color:rgba(237, 237, 243, 0.3);
     --main-h-color: blue;
 }
 body{
-    background-image:url("afternoon-sky.jpg");
+    background-image:url("background_sky/afternoon-sky.jpg");
     background-size:cover;
     font-family:'Open Sans',sans-serif;
     color: black;
