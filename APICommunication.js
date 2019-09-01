@@ -10,13 +10,15 @@ function APIRequestByGeoCoordinates(lat, lon)
 
 function APIRequestByCityName(city)
 {
-    return `http://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=aa89918a50010961a10dfbbee0781cb1`
+    return `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&APPID=aa89918a50010961a10dfbbee0781cb1`
 }
+/*funkcja KelvinToCelsjusz jest zbędna-można pobrać dane z api bezpośrednio ze stopniami Celsjusza, starczy dodać '&units=metric' 
+w adresie api, tak zrobiłam wyżej^
 function KelvinToCelcjusz(K){
     const prec = 100;
     return Math.floor((K - 273.15)*prec)/prec;
 }
-
+*/
 async function Getdata(APIpromise){
     var code = [];
     const values = [];
@@ -32,11 +34,15 @@ async function Getdata(APIpromise){
                 data.push(...APIdata.list);
             }
         });
+/*cała ta część jest zbędna jeśli pobieramy dane już w odpowiednich jednostkach
         data.map(x => {
             x.main.temp = KelvinToCelcjusz(x.main.temp);
             x.main.temp_max = KelvinToCelcjusz(x.main.temp_max);
             x.main.temp_min = KelvinToCelcjusz(x.main.temp_min);
+
         } );
+    również async i await jest wtedy (chyba) zbędne ?
+        */
 }
 function ActuallDate()
 {
@@ -47,6 +53,7 @@ function ActuallDate()
     const day = noDay >= 10 ? noDay : `0${noDay}`;
     return `${date.getFullYear()}-${month}-${day}`;
 }
+/*tutaj coś nie działa, zwraca pustą tablicę*/
 function GetDataForDay(date, table)
 {
     //d.dt_txt.includes(date)
