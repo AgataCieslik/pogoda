@@ -22,15 +22,15 @@
     </header>
     
     <section id="inputSection">
-       
+       <!---rozważyć czy zatrzymać przyciski i w jakiej roli-->
         <form class="container justify-content-center">
             <div class="row">
-                <div id="placeInput" class="dataInput col-sm-6">
-                    <input type="text" placeholder="Twoje miasto">
+                <div class="dataInput col-sm-6">
+                    <input id="placeInput" type="text" placeholder="Twoje miasto">
                     <button id="placeCheck" class="check"><span class="oi oi-circle-check"></span></button>
                 </div>
-                <div id="dateInput" class="dataInput col-sm-6">
-                    <input type="date">
+                <div class="dataInput col-sm-6">
+                    <input id="dateInput" type="date">
                     <button id="dateCheck" class="check"><span class="oi oi-circle-check"></span></button>
                 </div>
             </div>
@@ -43,27 +43,27 @@
     
     <main>
        
-        <div id="messagesBar" class="warning bar">
+        <div id="messagesBar">
             <button id="closeMessages" class="close"><span class="oi oi-circle-x"></span></button>
         </div>
-        <section id="messages" class="warning">
+        <section id="messages">
         
         <!--sekcja na ewentualne komunikaty o błędach-->
           <div class="container">
               <div class="row">
-                  <div id="typingError" class="col-md-6" >
+                  <div id="typingError" class="error col-md-6" >
                       <h4><span class="oi oi-warning"></span> Nazwa miasta została wpisana niepoprawnie</h4>
                       <p>Nazwa miasta nie powinna zawierać znaków różnych od liter.</p>
                   </div>
-                  <div id="noPlaceError" class="col-md-6">
+                  <div id="noPlaceError" class="error col-md-6">
                         <h4><span class="oi oi-warning"></span> Nie mamy danych dla Twojego miasta</h4>
                         <p>Niestety, nie mamy danych dla Twojego miasta. Spróbuj poszukać prognozy dla innego miasta położonego niedaleko Twojego miejsca zamieszkania.</p>
                   </div>
-                  <div id="dateError" class="col-md-6">
+                  <div id="dateError" class="error col-md-6">
                         <h4 ><span class="oi oi-warning"></span> Nie dysponujemy prognozą na wybrany dzień</h4>
                         <p>Udostępniamy prognozę pogody wyłącznie dla 5 najbliższych dni.</p>
                   </div>
-                  <div id="untypicalError" class="col-md-6">
+                  <div id="untypicalError" class="error col-md-6">
                         <h4><span class="oi oi-warning"></span >Wystąpił niezidentyfikowany błąd</h4>
                         <p>Spróbuj ponownie.</p>
                   </div>

@@ -69,12 +69,11 @@ section{
     justify-content:flex-end;
     background:var(--bg-color1);
 }
-.warning{
+#messages, #messagesBar{
     background:var(--warn-color);
-    padding-top:0;
     display:none;
 }
-.warning>div{
+.error{
     display:none;
 }
 .bar.warning{
