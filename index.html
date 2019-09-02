@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Cantora+One|Open+Sans&display=swap" rel="stylesheet"> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script> 
 </head>
 
 <body>
@@ -25,8 +26,8 @@
        
         <form class="container justify-content-center">
             <div class="row">
-                <div id="placeInput" class="dataInput col-sm-6">
-                    <input type="text" placeholder="Twoje miasto">
+                <div id="placeInput"  class="dataInput col-sm-6">
+                    <input id="searchCity" type="text" placeholder="Twoje miasto">
                     <button id="placeCheck" class="check"><span class="oi oi-circle-check"></span></button>
                 </div>
                 <div id="dateInput" class="dataInput col-sm-6">
@@ -42,7 +43,7 @@
     </div>
     
     <main>
-       
+        <div class ="warningZone">
         <div id="messagesBar" class="warning bar">
             <button id="closeMessages" class="close"><span class="oi oi-circle-x"></span></button>
         </div>
@@ -71,11 +72,12 @@
             </div>
         
         </section>
-
+</div>
         <header id="forecastHeader">
                 <h2>Prognoza szczegółowa</h2>
-                <button id="forecastShowHide"class="showHide"><span class="oi oi-chevron-top"></span></button>
+                <button id="forecastShowHide"class="showHide"><span class="oi oi-chevron-bottom"></span></button>
         </header>
+        <div class = "content">
         <section id="forecast" class="container-fluid">
            
             <div class="row">
@@ -87,11 +89,14 @@
             <a title="Zmień dane" href="#inputSection"><button class="edit" ><span class="oi oi-pencil"></span></button></a>
             <button class="info"><span class="oi oi-info"></span></button>
         </div>
+        </div>
+
         
         <header id="shortForecastHeader">
                 <h2>Prognoza na najbliższe dni</h2>
-                <button><span class="oi oi-chevron-top"></span></button>
+                <button class="showHide"><span class="oi oi-chevron-bottom"></span></button>
         </header>
+        <div class = "content">
         <section id="shortForecast" class="container-fluid">
             
             <!--prognoza skrótowa-->
@@ -223,19 +228,21 @@
             <a title="Zmień dane" href="#inputSection"><button ><span class="oi oi-pencil"></span></button></a>
             <button ><span class="oi oi-info"></span></button>
         </div>
+        </div>
        
         <header id="chartsHeader">
                 <h2>Wykresy</h2>
-                <button><span class="oi oi-chevron-top"></span></button>
+                <button class="showHide"><span class="oi oi-chevron-bottom"></span></button>
         </header>
+        <div class="content">
         <section id="charts" class="container-fluid"> 
-            <!--wykresy-->
+            <canvas id="chart" class="mx-auto mb-3"></canvas>
         </section>
         <div id="chartsBar" class="bar">
             <a title="Zmień dane" href="#inputSection"><button><span class="oi oi-pencil"></span></button></a>
             <button><span class="oi oi-info"></span></button>
         </div>
-
+        </div>
     </main>
     
     <footer class="fixed-bottom">
@@ -247,6 +254,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="main.js"></script>
     <script src="APICommunication.js"></script>
+    <script src="functionalities.js"></script>
+    <script src="chart.js"></script>
+
  </body>
 
 </html>

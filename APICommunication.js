@@ -2,7 +2,7 @@
 let data = [];
 function APIRequestByGeoCoordinates(lat, lon) 
 {
-    let  request =  `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&APPID=aa89918a50010961a10dfbbee0781cb1`;
+    let  request =  `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&APPID=aa89918a50010961a10dfbbee0781cb1&units=metric`;
     //let  request =  `http://api.openweathermap.org/data/2.5/forecast?qq=London,us&APPID=aa89918a50010961a10dfbbee0781cb1`;
     //api.openweathermap.org/data/2.5/forecast/daily?q=München,DE&cnt=8
     return request;
@@ -10,7 +10,7 @@ function APIRequestByGeoCoordinates(lat, lon)
 
 function APIRequestByCityName(city)
 {
-    return `http://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=aa89918a50010961a10dfbbee0781cb1`
+    return `http://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=aa89918a50010961a10dfbbee0781cb1&units=metric`
 }
 function KelvinToCelcjusz(K){
     const prec = 100;
@@ -32,6 +32,15 @@ async function Getdata(APIpromise){
             {
 
                 data.push(...APIdata.list);
+                // przykładowe dane do wykresu - Mateusz
+                x=[];
+                y=[];
+                for(let i=0; i<10; i++){
+                    x.push(APIdata.list[i].dt_txt);
+                    y.push(APIdata.list[i].main.temp);
+                };
+                getChart();
+                // 
             }
         });
         data.map(x => {
