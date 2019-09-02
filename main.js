@@ -11,3 +11,11 @@ placeInput.addEventListener('input', function(e){
 /*rozważyć polskie znaki!*/
 });
 /*potrzebna jeszcze walidacja daty*/
+/*POBIERANIE DANYCH DLA INPUTU MIASTA*/
+
+const sub=document.getElementById('submit');
+sub.addEventListener('click',function(e){
+    Getdata(APIRequestByCityName(placeInput.value));
+/*trzeba również dodać wybór wg daty*/
+/*trzeba rozważyć wszelakie błędy*/
+})

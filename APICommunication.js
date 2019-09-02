@@ -19,6 +19,7 @@ function KelvinToCelcjusz(K){
     return Math.floor((K - 273.15)*prec)/prec;
 }
 */
+
 async function Getdata(APIpromise){
     var code = [];
     const values = [];
@@ -30,7 +31,9 @@ async function Getdata(APIpromise){
                 return APIdata.message;
             if(APIdata !== undefined)
             {
-
+                /*linia dodana, by uwzględnić przypadek wielokrotnego pobierania danych-.push dodaje elementy do istniejącej 
+                tablicy, nie usuwając starych*/
+                data=[];
                 data.push(...APIdata.list);
             }
         });
@@ -64,14 +67,14 @@ function GetDataForDay(date, table)
 
 
 
- Getdata(APIRequestByCityName('London'));
+/* Getdata(APIRequestByCityName('London'));
 //console.log(data);
 //console.log(data);
 let date = new Date();
 //console.log(date);
+*/
 
 
-
-const d = ActuallDate();
+/*const d = ActuallDate();
 let dd = GetDataForDay(d, data)
-console.log(dd);
+console.log(dd);*/
