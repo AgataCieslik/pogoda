@@ -58,10 +58,10 @@ function GetDataForDay(date, table)
 
 
  Getdata(APIRequestByCityName('London'));
-//console.log(data);
-//console.log(data);
+console.log(data);
+console.log(data);
 let date = new Date();
-//console.log(date);
+console.log(date);
 
 
 

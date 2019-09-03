@@ -1,7 +1,7 @@
 
 const incorrectCityNameInfo = "City can't contain special charakters";
 
-const doc = document.getElementById('inputCity');
+const doc = document.getElementById('placeInput');
 doc.addEventListener('keyup', function(e){
     const errorText = document.getElementById('CityHelp');
     const regW = /\W/;
