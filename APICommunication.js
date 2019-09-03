@@ -36,10 +36,27 @@ async function Getdata(APIpromise){
                 x=[];
                 y=[];
                 for(let i=0; i<10; i++){
-                    x.push(APIdata.list[i].dt_txt);
+
+                    x.push(APIdata.list[i].dt_txt.substr(0,16));
                     y.push(APIdata.list[i].main.temp);
                 };
                 getChart();
+
+                x2=[];
+                y2=[];
+                for(let i=0; i<10; i++){
+                    x2.push(APIdata.list[i].dt_txt.substr(0,16));
+                    y2.push(APIdata.list[i].main.pressure);
+                };
+                getChart2();
+
+                x3=[];
+                y3=[];
+                for(let i=0; i<10; i++){
+                    x3.push(APIdata.list[i].dt_txt.substr(0,16));
+                    y3.push(APIdata.list[i].main.humidity);
+                };
+                getChart3();
                 // 
             }
         });
