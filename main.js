@@ -8,6 +8,14 @@ placeInput.addEventListener('input', function(e){
         document.getElementById('messages').style.display="block";
         document.getElementById('typingError').style.display="block";
     }
+    else{
+        /*może można by jakoś sprytniej?*/
+        if(document.getElementById('dateError').style.display==="none"){
+            document.getElementById('messagesBar').style.display="none";
+            document.getElementById('messages').style.display="none";}
+        document.getElementById('typingError').style.display="none";
+
+    }
 /*rozważyć polskie znaki?-w api id jest bz polskich znaków*/
 });
 const dateInput=document.getElementById('dateInput');
@@ -21,13 +29,21 @@ dateInput.addEventListener('input', function(e){
         document.getElementById('messages').style.display="block";
         document.getElementById('dateError').style.display="block";
     }
+    else{
+        if(document.getElementById('typingError').style.display==="none"){
+            document.getElementById('messagesBar').style.display="none";
+            document.getElementById('messages').style.display="none";}
+        document.getElementById('dateError').style.display="none";
+
+    }
 })
 /*potrzebna jeszcze walidacja daty*/
 /*POBIERANIE DANYCH DLA INPUTU MIASTA*/
 
 const sub=document.getElementById('submit');
-    sub.addEventListener('click',function(e){
-        Getdata(APIRequestByCityName(placeInput.value));
+sub.addEventListener('click',function(e){
+    Getdata(APIRequestByCityName(placeInput.value));
 /*trzeba również dodać wybór wg daty*/
 /*trzeba rozważyć wszelakie błędy*/
+/*trzeba upewnić sie, że zajdzie walidacja przed pobraniem danych*/
 })
