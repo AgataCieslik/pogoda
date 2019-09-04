@@ -10,7 +10,7 @@ function APIRequestByGeoCoordinates(lat, lon)
 
 function APIRequestByCityName(city)
 {
-    return `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&APPID=aa89918a50010961a10dfbbee0781cb1`
+    return `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&lang={pl}&APPID=aa89918a50010961a10dfbbee0781cb1`
 }
 /*funkcja KelvinToCelsjusz jest zbędna-można pobrać dane z api bezpośrednio ze stopniami Celsjusza, starczy dodać '&units=metric' 
 w adresie api, tak zrobiłam wyżej^
@@ -19,6 +19,7 @@ function KelvinToCelcjusz(K){
     return Math.floor((K - 273.15)*prec)/prec;
 }
 */
+/*Język przestawiony w api na polski (&lang={pl}), ale nie zawuażyłam zmiany */
 
 async function Getdata(APIpromise){
     var code = [];
@@ -47,7 +48,7 @@ async function Getdata(APIpromise){
     również async i await jest wtedy (chyba) zbędne ?
         */
 }
-function ActuallDate()
+function ActualDate()
 {
     const date = new Date();
     const noMonth = date.getMonth() + 1;
