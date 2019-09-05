@@ -32,9 +32,8 @@ const iconUrlfromId = (iconId)=>{
 
 //utworzenie sekcji DetailedSection
 
-const createDetailedSection = async (cityName, dataId)=>{
-    let data = await Getdata(APIRequestByCityName(cityName));
-    console.log(data);
+const createDetailedSection = async (dataId)=>{
+
     let moment = data.find(el => el.dt === dataId);
     //console.log(moment);
     let detailedForecast = {
@@ -93,8 +92,8 @@ const createDetailedSection = async (cityName, dataId)=>{
 
 
 //utworzenie sekcji ShortSection
-const createShortSection = async (cityName)=>{
-    let data = await Getdata(APIRequestByCityName(cityName));
+const createShortSection = async ()=>{
+
     let next5days = [];
 
     
