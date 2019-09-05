@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="weather-icons-master/css/weather-icons-wind.css">
+    <link rel="stylesheet" type="text/css" href="weather-icons-master/css/weather-icons.css">
+    <link rel="stylesheet" type="text/css" href="weather-icons-master/css/weather-icons-wind.min.css">
+    <link rel="stylesheet" type="text/css" href="weather-icons-master/css/weather-icons.min.css">
+
     <link href="https://fonts.googleapis.com/css?family=Cantora+One|Open+Sans&display=swap" rel="stylesheet"> 
 </head>
 
@@ -77,9 +82,15 @@
                 <button id="forecastShowHide"class="showHide"><span class="oi oi-chevron-top"></span></button>
         </header>
         <section id="forecast" class="container-fluid">
-           
-            <div class="row">
+            <h4 id="detailedHeader">Dane dla: </h4>
+            <div class="row justify-content-center">
            <!---sekcja na prognozę szczegółową (dla jednego dnia)-->
+                <div id='detail' class='col-sm-4 col-md-3'>cokolwiek</div>
+                <div id='detail' class='col-sm-4 col-md-3'>cokolwiek</div>
+                <div id='detail' class='col-sm-4 col-md-3'>cokolwiek</div>
+                <div id='detail' class='col-sm-4 col-md-3'>cokolwiek</div>
+                <div id='detail' class='col-sm-4 col-md-3'>cokolwiek</div>
+                <div id='detail' class='col-sm-4 col-md-3'>cokolwiek</div>
             </div>
         
         </section>
@@ -97,120 +108,130 @@
             <!--prognoza skrótowa-->
             <div class="row justify-content-center">
                 <div id="short" class="col-sm-4 col-md-3 col-lg-2" >
+                    <h5 class="shortHeader">cokolwiek</h5>
                     <figure>
                         <img class="shortImg" src="weather_icons/sun.svg">
+                        <figcaption></figcaption>
                     </figure>
                     <table class="table">
                         <tbody>
                             <tr>
-                                <th class="shortTemp">temperatura</th>
-                                <td>100</td>
+                                <th>temperatura</th>
+                                <td class="shortTemperature">100</td>
 
                             </tr>
                             <tr>
-                                <th class="shortPress">ciśnienie</th>
-                                <td>100</td>
+                                <th>ciśnienie</th>
+                                <td class="shortPressure">100</td>
 
                             </tr>
                             <tr>
-                                <th class="shortRain">opady</th>
-                                <td>100</td>
+                                <th>Wilgotność</th>
+                                <td class="shortHumidity">100</td>
 
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div id="short" class="shortForecast col-sm-4 col-md-3 col-lg-2">
+                    <h5 class="shortHeader">cokolwiek</h5>
                     <figure>
                         <img class="shortImg" src="weather_icons/sun.svg">
+                        <figcaption></figcaption>
                     </figure>
                     <table class="table">
                             <tbody>
                                 <tr>
-                                    <th class="shortTemp">temperatura</th>
-                                    <td>100</td>
+                                    <th></th>
+                                    <td class="shortTemperature">100</td>
         
                                 </tr>
                                 <tr>
-                                    <th class="shortPress">ciśnienie</th>
-                                    <td>100</td>
+                                    <th></th>
+                                    <td class="shortPressure">100</td>
         
                                 </tr>
                                 <tr>
-                                    <th class="shortRain">opady</th>
-                                    <td>100</td>
+                                    <th></th>
+                                    <td class="shortHumidity">100</td>
         
                                 </tr>
                             </tbody>
                     </table>
                 </div>
                 <div id="short" class="shortForecast col-sm-4 col-md-3 col-lg-2">
+                    <h5 class="shortHeader">cokolwiek</h5>
                     <figure>
                         <img class="shortImg" src="weather_icons/sun.svg">
+                        <figcaption></figcaption>
                     </figure>
                     <table class="table">
                             <tbody>
                                 <tr>
-                                    <th class="shortTemp">temperatura</th>
-                                    <td>100</td>
+                                    <th></th>
+                                    <td class="shortTemperature">100</td>
         
                                 </tr>
                                 <tr>
-                                    <th class="shortPress">ciśnienie</th>
-                                    <td>100</td>
+                                    <th></th>
+                                    <td class="shortPressure">100</td>
         
                                 </tr>
                                 <tr>
-                                    <th class="shortRain">opady</th>
-                                    <td>100</td>
+                                    <th></th>
+                                    <td class="shortHumidity">100</td>
         
                                 </tr>
                             </tbody>
                     </table>
                 </div>
                 <div id="short" class="shortForecast col-sm-4 col-md-3 col-lg-2">
+                    <h5 class="shortHeader">cokolwiek</h5>
                     <figure>
                         <img class="shortImg" src="weather_icons/sun.svg">
+                        <figcaption></figcaption>
                     </figure>
                     <table class="table">
                             <tbody>
                                 <tr>
-                                    <th class="shortTemp">temperatura</th>
-                                    <td>100</td>
+                                    <th></th>
+                                    <td class="shortTemperature">100</td>
         
                                 </tr>
                                 <tr>
-                                    <th class="shortPress">ciśnienie</th>
-                                    <td>100</td>
+                                    <th></th>
+                                    <td class="shortPressure">100</td>
         
                                 </tr>
                                 <tr>
-                                    <th class="shortRain">opady</th>
-                                    <td>100</td>
+                                    <th></th>
+                                    <td class="shortHumidity">100</td>
         
                                 </tr>
                             </tbody>
                     </table>
                 </div>
                 <div id="short" class="shortForecast col-sm-4 col-md-3 col-lg-2">
+                    <h5 class="shortHeader">cokolwiek</h5>
                     <figure>
-                        <img class="shortImg" src="weather_icons/sun.svg">
+                        <img class="shortImg" src="http://openweathermap.org/img/wn/10d@2x.png">
+                        <figcaption></figcaption>
                     </figure>
                     <table class="table">
                             <tbody>
                                 <tr>
-                                    <th class="shortTemp">temperatura</th>
-                                    <td>100</td>
+                                    <th></th>
+                                    <td class="shortTemperature">100</td>
         
                                 </tr>
                                 <tr>
-                                    <th class="shortPress">ciśnienie</th>
-                                    <td>100</td>
+                                    <th></th>
+                                    <td class="shortPressure">100</td>
         
                                 </tr>
                                 <tr>
-                                    <th class="shortRain">opady</th>
-                                    <td>100</td>
+                                    <th></th>
+                                    <td class="shortHumidity">100</td>
         
                                 </tr>
                             </tbody>
@@ -247,6 +268,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="main.js"></script>
     <script src="APICommunication.js"></script>
+    <script src="Forecast.js" ></script>
     
  </body>
 

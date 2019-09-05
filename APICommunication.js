@@ -18,6 +18,7 @@ function KelvinToCelcjusz(K){
 }
 
 async function Getdata(APIpromise){
+    let data1 = [];
     var code = [];
     const values = [];
     const body = document.querySelector('body');
@@ -28,15 +29,17 @@ async function Getdata(APIpromise){
                 return APIdata.message;
             if(APIdata !== undefined)
             {
-
-                data.push(...APIdata.list);
+                //console.log(APIdata);
+                data1.push(...APIdata.list);
             }
         });
-        data.map(x => {
+        data1.map(x => {
             x.main.temp = KelvinToCelcjusz(x.main.temp);
             x.main.temp_max = KelvinToCelcjusz(x.main.temp_max);
             x.main.temp_min = KelvinToCelcjusz(x.main.temp_min);
         } );
+    return data1;
+    //console.log(data1)
 }
 function ActuallDate()
 {
@@ -50,16 +53,16 @@ function ActuallDate()
 function GetDataForDay(date, table)
 {
     //d.dt_txt.includes(date)
-    console.log(table);
-    console.log(date);
+    //console.log(table);
+    //console.log(date);
     return table.filter(q => q.dt_txt.includes(date));
 }
 
 
 
- Getdata(APIRequestByCityName('London'));
-console.log(data);
-console.log(data);
+ //Getdata(APIRequestByCityName('London'));
+//console.log(data);
+//console.log(data);
 let date = new Date();
 console.log(date);
 
@@ -67,4 +70,4 @@ console.log(date);
 
 const d = ActuallDate();
 let dd = GetDataForDay(d, data)
-console.log(dd);
+//console.log(dd);

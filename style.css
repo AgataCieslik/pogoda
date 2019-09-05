@@ -84,6 +84,33 @@ section{
 
 
 
-/* Prognoza szczegółowa */
+
+
+/* Prognoza ogólna */
+
+#short{
+    text-align: center;
+} 
+
+#short th{
+    text-align: left;
+}
+
+#short h5{
+    font-family: 'Cantora One', sans-serif;
+}
+
+#forecast h3{
+    font-family: 'Cantora One', sans-serif;
+}
+
+.wi{
+    font-size: 60px;
+    padding: 50px;
+    /* color: white; */
+}
+
+
+
 
 
