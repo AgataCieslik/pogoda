@@ -21,11 +21,11 @@ function KelvinToCelcjusz(K){
 */
 /*Język przestawiony w api na polski (&lang={pl}), ale nie zawuażyłam zmiany */
 
-async function Getdata(APIpromise){
+function Getdata(APIpromise){
     var code = [];
     const values = [];
     const body = document.querySelector('body');
-    await fetch(APIpromise)
+    fetch(APIpromise)
         .then( response => response.json())
         .then (APIdata => {
             if(APIdata.cod !== "200")
@@ -34,7 +34,7 @@ async function Getdata(APIpromise){
             {
                 /*linia dodana, by uwzględnić przypadek wielokrotnego pobierania danych-.push dodaje elementy do istniejącej 
                 tablicy, nie usuwając starych*/
-                data=[];
+                data = [];
                 data.push(...APIdata.list);
             }
         });
