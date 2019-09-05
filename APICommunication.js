@@ -23,8 +23,6 @@ function Getdata(APIpromise){
                 return APIdata.message;
             if(APIdata !== undefined)
             {
-                /*linia dodana, by uwzględnić przypadek wielokrotnego pobierania danych-.push dodaje elementy do istniejącej 
-                tablicy, nie usuwając starych*/
                 data = [];
                 data.push(...APIdata.list);
                 // przykładowe dane do wykresu - Mateusz
@@ -65,7 +63,7 @@ function ActualDate()
     const day = noDay >= 10 ? noDay : `0${noDay}`;
     return `${date.getFullYear()}-${month}-${day}`;
 }
-/*tutaj coś nie działa, zwraca pustą tablicę*/
+
 function GetDataForDay(date, table)
 {
     //d.dt_txt.includes(date)

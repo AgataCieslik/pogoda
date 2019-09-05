@@ -16,7 +16,6 @@ placeInput.addEventListener('input', function(e){
         sub.setAttribute('disabled', 'disabled');
     }
     else{
-        /*może można by jakoś sprytniej?*/
         document.getElementById('typingError').style.display="none";     
         errorsTypes = errorsTypes.filter(err => err != 1);    // usun blad z tablicy    
         if(errorsTypes.length == 0)  
@@ -62,5 +61,6 @@ sub.addEventListener('click',function(e){
 /*trzeba również dodać wybór wg daty*/
 /*trzeba rozważyć wszelakie błędy*/
 /*trzeba upewnić sie, że zajdzie walidacja przed pobraniem danych*/
+/*trzeba przemyśleć ASYNCHRONICZNOŚĆ!!!*/
 })
     
