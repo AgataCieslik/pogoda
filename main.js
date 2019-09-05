@@ -53,9 +53,11 @@ dateInput.addEventListener('input', function(e){
 /*POBIERANIE DANYCH DLA INPUTU MIASTA*/
 
 
-sub.addEventListener('click',function(e){
-    Getdata(APIRequestByCityName(placeInput.value));
-    console.log(data);
+sub.addEventListener('click', async function(e){
+        await Getdata(APIRequestByCityName(placeInput.value));
+        await createShortSection();
+        //uwaga: gdzieś 8 września przestanie działać:
+        createDetailedSection(1567771200);
 /*trzeba również dodać wybór wg daty*/
 /*trzeba rozważyć wszelakie błędy*/
 /*trzeba upewnić sie, że zajdzie walidacja przed pobraniem danych*/
