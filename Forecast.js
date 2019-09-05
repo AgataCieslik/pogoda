@@ -196,5 +196,3 @@ const createShortSection = async (cityName)=>{
 }
 
 
-createShortSection('Dzierżoniów');
-createDetailedSection('Dzierżoniów', 1567771200);
