@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Cantora+One|Open+Sans&display=swap" rel="stylesheet"> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script> 
 </head>
 
 <body>
@@ -28,7 +29,6 @@
                 <div class="dataInput col-sm-6">
                     <input id="placeInput" type="text" placeholder="Twoje miasto">
                     <button  class="clear"><span class="oi oi-delete"></span></button>
-                    <!--czy dodać przycisk reset? submit czy button?-->
                 </div>
                 <div class="dataInput col-sm-6">
                     <input id="dateInput" type="date">
@@ -46,11 +46,20 @@
     </div>
     
     <main>
+
        
         <!-- <div id="messagesBar">
              <button id="closeMessages" class="close"><span class="oi oi-circle-x"></span></button> 
         </div> -->
         <section id="messages">        
+<!--
+        <div class ="warningZone hidden">
+        <div id="messagesBar" class="warning bar">
+            <button id="closeMessages" class="close"><span class="oi oi-circle-x"></span></button>
+        </div>
+        <section id="messages" class="warning">
+        -->
+
         <!--sekcja na ewentualne komunikaty o błędach-->
           <div class="container">
               <div class="row">
@@ -73,11 +82,12 @@
               </div>
             </div>        
         </section>
-
+</div>
         <header id="forecastHeader">
                 <h2>Prognoza szczegółowa</h2>
-                <button id="forecastShowHide"class="showHide"><span class="oi oi-chevron-top"></span></button>
+                <button id="forecastShowHide"class="showHide"><span class="oi oi-chevron-bottom"></span></button>
         </header>
+        <div class = "content">
         <section id="forecast" class="container-fluid">
            
             <div class="row">
@@ -89,11 +99,14 @@
             <a title="Zmień dane" href="#inputSection"><button class="edit" ><span class="oi oi-pencil"></span></button></a>
             <button class="info"><span class="oi oi-info"></span></button>
         </div>
+        </div>
+
         
         <header id="shortForecastHeader">
                 <h2>Prognoza na najbliższe dni</h2>
-                <button><span class="oi oi-chevron-top"></span></button>
+                <button class="showHide"><span class="oi oi-chevron-bottom"></span></button>
         </header>
+        <div class = "content">
         <section id="shortForecast" class="container-fluid">
             
             <!--prognoza skrótowa-->
@@ -225,19 +238,23 @@
             <a title="Zmień dane" href="#inputSection"><button ><span class="oi oi-pencil"></span></button></a>
             <button ><span class="oi oi-info"></span></button>
         </div>
+        </div>
        
         <header id="chartsHeader">
                 <h2>Wykresy</h2>
-                <button><span class="oi oi-chevron-top"></span></button>
+                <button class="showHide"><span class="oi oi-chevron-bottom"></span></button>
         </header>
+        <div class="content">
         <section id="charts" class="container-fluid"> 
-            <!--wykresy-->
+            <canvas id="chart" class="mx-auto mb-3"></canvas>
+            <canvas id="chart2" class="mx-auto mb-3"></canvas>
+            <canvas id="chart3" class="mx-auto mb-3"></canvas>
         </section>
         <div id="chartsBar" class="bar">
             <a title="Zmień dane" href="#inputSection"><button><span class="oi oi-pencil"></span></button></a>
             <button><span class="oi oi-info"></span></button>
         </div>
-
+        </div>
     </main>
     
     <footer class="fixed-bottom">
@@ -248,7 +265,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="APICommunication.js"></script>
+
     <script src="main.js"></script>
+    <script src="functionalities.js"></script>
+    <script src="chart.js"></script>
+
 
  </body>
 

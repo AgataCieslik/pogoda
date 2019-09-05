@@ -80,3 +80,31 @@ section{
 .bar.warning{
     padding-bottom:0;
 }
+
+/*ZMIANY Mateusz*/
+
+.content {
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.3s ease-in-out;
+}
+
+.showHide{
+    transition: 0.3s ease-in-out;
+}
+
+.showHide.isOpen{
+    transform: rotate(180deg);
+}
+
+.hidden{
+    display: none;
+}
+
+button:focus{
+    outline:0;
+}
+
+canvas{
+    max-width: 60vw;
+}

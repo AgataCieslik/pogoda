@@ -2,9 +2,7 @@
 let data = [];
 function APIRequestByGeoCoordinates(lat, lon) 
 {
-    let  request =  `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&APPID=aa89918a50010961a10dfbbee0781cb1`;
-    //let  request =  `http://api.openweathermap.org/data/2.5/forecast?qq=London,us&APPID=aa89918a50010961a10dfbbee0781cb1`;
-    //api.openweathermap.org/data/2.5/forecast/daily?q=München,DE&cnt=8
+    let  request =  `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&APPID=aa89918a50010961a10dfbbee0781cb1&units=metric`;
     return request;
 }
 
@@ -12,13 +10,6 @@ function APIRequestByCityName(city)
 {
     return `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&lang={pl}&APPID=aa89918a50010961a10dfbbee0781cb1`
 }
-/*funkcja KelvinToCelsjusz jest zbędna-można pobrać dane z api bezpośrednio ze stopniami Celsjusza, starczy dodać '&units=metric' 
-w adresie api, tak zrobiłam wyżej^
-function KelvinToCelcjusz(K){
-    const prec = 100;
-    return Math.floor((K - 273.15)*prec)/prec;
-}
-*/
 /*Język przestawiony w api na polski (&lang={pl}), ale nie zawuażyłam zmiany */
 
 function Getdata(APIpromise){
@@ -36,17 +27,34 @@ function Getdata(APIpromise){
                 tablicy, nie usuwając starych*/
                 data = [];
                 data.push(...APIdata.list);
+                // przykładowe dane do wykresu - Mateusz
+                x=[];
+                y=[];
+                for(let i=0; i<10; i++){
+
+                    x.push(APIdata.list[i].dt_txt.substr(0,16));
+                    y.push(APIdata.list[i].main.temp);
+                };
+                getChart();
+
+                x2=[];
+                y2=[];
+                for(let i=0; i<10; i++){
+                    x2.push(APIdata.list[i].dt_txt.substr(0,16));
+                    y2.push(APIdata.list[i].main.pressure);
+                };
+                getChart2();
+
+                x3=[];
+                y3=[];
+                for(let i=0; i<10; i++){
+                    x3.push(APIdata.list[i].dt_txt.substr(0,16));
+                    y3.push(APIdata.list[i].main.humidity);
+                };
+                getChart3();
+                // 
             }
         });
-/*cała ta część jest zbędna jeśli pobieramy dane już w odpowiednich jednostkach
-        data.map(x => {
-            x.main.temp = KelvinToCelcjusz(x.main.temp);
-            x.main.temp_max = KelvinToCelcjusz(x.main.temp_max);
-            x.main.temp_min = KelvinToCelcjusz(x.main.temp_min);
-
-        } );
-    również async i await jest wtedy (chyba) zbędne ?
-        */
 }
 function ActualDate()
 {
@@ -66,16 +74,3 @@ function GetDataForDay(date, table)
     return table.filter(q => q.dt_txt.includes(date));
 }
 
-
-
-/* Getdata(APIRequestByCityName('London'));
-//console.log(data);
-//console.log(data);
-let date = new Date();
-//console.log(date);
-*/
-
-
-/*const d = ActuallDate();
-let dd = GetDataForDay(d, data)
-console.log(dd);*/
