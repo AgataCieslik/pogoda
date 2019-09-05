@@ -27,7 +27,8 @@ footer{
 }
 div.dataInput{
     padding:1.5em;
-    padding-bottom:0;
+    padding-bottom:1.5em;
+    text-align:center;
 
 }
 input{
@@ -69,14 +70,71 @@ section{
     justify-content:flex-end;
     background:var(--bg-color1);
 }
-.warning{
+#messages, #messagesBar{
     background:var(--warn-color);
-    padding-top:0;
     display:none;
 }
-.warning>div{
+.error{
     display:none;
 }
 .bar.warning{
     padding-bottom:0;
 }
+
+
+
+
+
+
+/* Prognoza ogólna */
+
+#short{
+    text-align: center;
+} 
+
+#short th{
+    text-align: left;
+}
+
+#short h5{
+    font-family: 'Cantora One', sans-serif;
+}
+
+#forecast h3{
+    font-family: 'Cantora One', sans-serif;
+}
+
+.wi{
+    font-size: 60px;
+    padding: 50px;
+    /* color: white; */
+}
+
+/*ZMIANY Mateusz*/
+
+.content {
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.3s ease-in-out;
+}
+
+.showHide{
+    transition: 0.3s ease-in-out;
+}
+
+.showHide.isOpen{
+    transform: rotate(180deg);
+}
+
+.hidden{
+    display: none;
+}
+
+button:focus{
+    outline:0;
+}
+
+canvas{
+    max-width: 60vw;
+}
+
