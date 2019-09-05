@@ -3,25 +3,25 @@
 const dayName = (dayNr)=>{
     switch(dayNr){
         case 0:
-            return 'poniedziałek';
+            return 'Niedziela';
             break;
         case 1:
-            return 'wtorek';
+            return 'Poniedziałek';
             break;
         case 2:
-            return 'środa';
+            return 'Wtorek';
             break;
         case 3:
-            return 'czwartek';
+            return 'Środa';
             break;
         case 4:
-            return 'piątek';
+            return 'Czwartek';
             break;
         case 5:
-            return 'sobota';
+            return 'Piątek';
             break;
         case 6:
-            return 'niedziela';
+            return 'Sobota';
             break;
     }
 }
@@ -136,7 +136,7 @@ const createShortSection = async (cityName)=>{
         let dayWeek = new Date(day[0].dt_txt).getDay();
         let dayMonth = new Date(day[0].dt_txt).getDate();
         if(dayMonth<10) dayMonth = '0' + dayMonth;
-        let month = new Date(day[0].dt_txt).getMonth();
+        let month = new Date(day[0].dt_txt).getMonth()+1;
         if(month<10) month = '0' + month;
         
         shortData.dayDate.push(`${dayName(dayWeek)}<br>${dayMonth}.${month}`)
