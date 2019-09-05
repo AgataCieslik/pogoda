@@ -32,7 +32,7 @@ const iconUrlfromId = (iconId)=>{
 
 //utworzenie sekcji DetailedSection
 
-const createDetailedSection = async (dataId)=>{
+const createDetailedSection = (dataId)=>{
 
     let moment = data.find(el => el.dt === dataId);
     //console.log(moment);
@@ -92,7 +92,7 @@ const createDetailedSection = async (dataId)=>{
 
 
 //utworzenie sekcji ShortSection
-const createShortSection = async ()=>{
+const createShortSection = ()=>{
 
     let next5days = [];
 
