@@ -23,17 +23,20 @@
     </header>
     
     <section id="inputSection">
-       
+       <!---rozważyć czy zatrzymać przyciski i w jakiej roli-->
         <form class="container justify-content-center">
             <div class="row">
-                <div id="placeInput"  class="dataInput col-sm-6">
-                    <input id="searchCity" type="text" placeholder="Twoje miasto">
-                    <button id="placeCheck" class="check"><span class="oi oi-circle-check"></span></button>
+                <div class="dataInput col-sm-6">
+                    <input id="placeInput" type="text" placeholder="Twoje miasto">
+                    <button  class="clear"><span class="oi oi-delete"></span></button>
                 </div>
-                <div id="dateInput" class="dataInput col-sm-6">
-                    <input type="date">
-                    <button id="dateCheck" class="check"><span class="oi oi-circle-check"></span></button>
+                <div class="dataInput col-sm-6">
+                    <input id="dateInput" type="date">
+                    <button  class="clear"><span class="oi oi-delete"></span></button>
                 </div>
+            </div>
+            <div class="row justify-content-center align-items-end">
+                <input id="submit" type="button" value="Sprawdź prognozy!" class="col-2">
             </div>
         </form>
     
@@ -43,34 +46,41 @@
     </div>
     
     <main>
+
+       
+        <!-- <div id="messagesBar">
+             <button id="closeMessages" class="close"><span class="oi oi-circle-x"></span></button> 
+        </div> -->
+        <section id="messages">        
+<!--
         <div class ="warningZone hidden">
         <div id="messagesBar" class="warning bar">
             <button id="closeMessages" class="close"><span class="oi oi-circle-x"></span></button>
         </div>
         <section id="messages" class="warning">
-        
+        -->
+
         <!--sekcja na ewentualne komunikaty o błędach-->
           <div class="container">
               <div class="row">
-                  <div id="typingError" class="col-md-6">
+                  <div id="typingError" class="error col-md-6" >
                       <h4><span class="oi oi-warning"></span> Nazwa miasta została wpisana niepoprawnie</h4>
                       <p>Nazwa miasta nie powinna zawierać znaków różnych od liter.</p>
                   </div>
-                  <div id="noPlaceError" class="col-md-6">
+                  <div id="noPlaceError" class="error col-md-6">
                         <h4><span class="oi oi-warning"></span> Nie mamy danych dla Twojego miasta</h4>
                         <p>Niestety, nie mamy danych dla Twojego miasta. Spróbuj poszukać prognozy dla innego miasta położonego niedaleko Twojego miejsca zamieszkania.</p>
                   </div>
-                  <div id="dateError" class="col-md-6">
+                  <div id="dateError" class="error col-md-6">
                         <h4 ><span class="oi oi-warning"></span> Nie dysponujemy prognozą na wybrany dzień</h4>
                         <p>Udostępniamy prognozę pogody wyłącznie dla 5 najbliższych dni.</p>
                   </div>
-                  <div id="untypicalError" class="col-md-6">
+                  <div id="untypicalError" class="error col-md-6">
                         <h4><span class="oi oi-warning"></span >Wystąpił niezidentyfikowany błąd</h4>
                         <p>Spróbuj ponownie.</p>
                   </div>
               </div>
-            </div>
-        
+            </div>        
         </section>
 </div>
         <header id="forecastHeader">
@@ -103,7 +113,7 @@
             <div class="row justify-content-center">
                 <div id="short1" class="col-sm-4 col-md-3 col-lg-2" >
                     <figure>
-                        <img src="sun.svg">
+                        <img src="weather_icons/sun.svg">
                     </figure>
                     <table class="table">
                         <tbody>
@@ -127,7 +137,7 @@
                 </div>
                 <div id="short2" class="shortForecast col-sm-4 col-md-3 col-lg-2">
                     <figure>
-                        <img src="sun.svg">
+                        <img src="weather_icons/sun.svg">
                     </figure>
                     <table class="table">
                             <tbody>
@@ -151,7 +161,7 @@
                 </div>
                 <div id="short3" class="shortForecast col-sm-4 col-md-3 col-lg-2">
                     <figure>
-                        <img src="sun.svg">
+                        <img src="weather_icons/sun.svg">
                     </figure>
                     <table class="table">
                             <tbody>
@@ -175,7 +185,7 @@
                 </div>
                 <div id="short4" class="shortForecast col-sm-4 col-md-3 col-lg-2">
                     <figure>
-                        <img src="sun.svg">
+                        <img src="weather_icons/sun.svg">
                     </figure>
                     <table class="table">
                             <tbody>
@@ -199,7 +209,7 @@
                 </div>
                 <div id="short5" class="shortForecast col-sm-4 col-md-3 col-lg-2">
                     <figure>
-                        <img src="sun.svg">
+                        <img src="weather_icons/sun.svg">
                     </figure>
                     <table class="table">
                             <tbody>
@@ -254,10 +264,12 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="main.js"></script>
     <script src="APICommunication.js"></script>
+
+    <script src="main.js"></script>
     <script src="functionalities.js"></script>
     <script src="chart.js"></script>
+
 
  </body>
 

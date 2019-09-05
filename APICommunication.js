@@ -3,34 +3,29 @@ let data = [];
 function APIRequestByGeoCoordinates(lat, lon) 
 {
     let  request =  `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&APPID=aa89918a50010961a10dfbbee0781cb1&units=metric`;
-    //let  request =  `http://api.openweathermap.org/data/2.5/forecast?qq=London,us&APPID=aa89918a50010961a10dfbbee0781cb1`;
-    //api.openweathermap.org/data/2.5/forecast/daily?q=München,DE&cnt=8
     return request;
 }
 
 function APIRequestByCityName(city)
 {
-    return `http://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=aa89918a50010961a10dfbbee0781cb1&units=metric`
+    return `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&lang={pl}&APPID=aa89918a50010961a10dfbbee0781cb1`
 }
-function KelvinToCelcjusz(K){
-    const prec = 100;
-    return Math.floor((K - 273.15)*prec)/prec;
-}
+/*Język przestawiony w api na polski (&lang={pl}), ale nie zawuażyłam zmiany */
 
-async function Getdata(APIpromise){
+function Getdata(APIpromise){
     var code = [];
     const values = [];
     const body = document.querySelector('body');
-
-    body.style.background = "gray";
-    await fetch(APIpromise)
+    fetch(APIpromise)
         .then( response => response.json())
         .then (APIdata => {
             if(APIdata.cod !== "200")
                 return APIdata.message;
             if(APIdata !== undefined)
             {
-
+                /*linia dodana, by uwzględnić przypadek wielokrotnego pobierania danych-.push dodaje elementy do istniejącej 
+                tablicy, nie usuwając starych*/
+                data = [];
                 data.push(...APIdata.list);
                 // przykładowe dane do wykresu - Mateusz
                 x=[];
@@ -60,13 +55,8 @@ async function Getdata(APIpromise){
                 // 
             }
         });
-        data.map(x => {
-            x.main.temp = KelvinToCelcjusz(x.main.temp);
-            x.main.temp_max = KelvinToCelcjusz(x.main.temp_max);
-            x.main.temp_min = KelvinToCelcjusz(x.main.temp_min);
-        } );
 }
-function ActuallDate()
+function ActualDate()
 {
     const date = new Date();
     const noMonth = date.getMonth() + 1;
@@ -75,6 +65,7 @@ function ActuallDate()
     const day = noDay >= 10 ? noDay : `0${noDay}`;
     return `${date.getFullYear()}-${month}-${day}`;
 }
+/*tutaj coś nie działa, zwraca pustą tablicę*/
 function GetDataForDay(date, table)
 {
     //d.dt_txt.includes(date)
@@ -83,16 +74,3 @@ function GetDataForDay(date, table)
     return table.filter(q => q.dt_txt.includes(date));
 }
 
-
-
- Getdata(APIRequestByCityName('London'));
-//console.log(data);
-//console.log(data);
-let date = new Date();
-//console.log(date);
-
-
-
-const d = ActuallDate();
-let dd = GetDataForDay(d, data)
-console.log(dd);
