@@ -12,11 +12,11 @@ function APIRequestByCityName(city)
 }
 /*Język przestawiony w api na polski (&lang={pl}), ale nie zawuażyłam zmiany */
 
-function Getdata(APIpromise){
+async function Getdata(APIpromise){
     var code = [];
     const values = [];
     const body = document.querySelector('body');
-    fetch(APIpromise)
+    await fetch(APIpromise)
         .then( response => response.json())
         .then (APIdata => {
             if(APIdata.cod !== "200")

@@ -1,5 +1,8 @@
 
+
+
 //funkcje pomocnicze
+
 const dayName = (dayNr)=>{
     switch(dayNr){
         case 0:
@@ -32,8 +35,8 @@ const iconUrlfromId = (iconId)=>{
 
 //utworzenie sekcji DetailedSection
 
-const createDetailedSection = (dataId)=>{
-
+const createDetailedSection = (cityName, dataId)=>{
+    
     let moment = data.find(el => el.dt === dataId);
     //console.log(moment);
     let detailedForecast = {
@@ -48,7 +51,7 @@ const createDetailedSection = (dataId)=>{
 
 
 
-    let detailDivs = document.querySelectorAll('#detail');
+    let detailDivs = document.querySelectorAll('.detail');
     
     detailDivs[0].innerHTML = `
     <figure>
@@ -83,7 +86,7 @@ const createDetailedSection = (dataId)=>{
     detailDivs[5].innerHTML = `
     <figure>
         <i class="wi wi-day-cloudy"></i>
-        <figcaption><b>Zachmurzenie</b> ${detailedForecast.clouds}m/s</figcaption>
+        <figcaption><b>Zachmurzenie</b> ${detailedForecast.clouds}%</figcaption>
     </figure>
     `
     let forecastHeader = document.getElementById('detailedHeader');
@@ -95,8 +98,6 @@ const createDetailedSection = (dataId)=>{
 const createShortSection = ()=>{
 
     let next5days = [];
-
-    
     let dayNr = -1;
     let previousMomentDay = -1;
 
@@ -154,7 +155,7 @@ const createShortSection = ()=>{
     let shortHumidityTags = document.querySelectorAll('.shortHumidity');
     let shortImages = document.querySelectorAll('.shortImg');
     let shortHeaders = document.querySelectorAll('.shortHeader');
-    let shortFigCaptions = document.querySelectorAll('#short figcaption')
+    let shortFigCaptions = document.querySelectorAll('.short figcaption')
 
     //console.log('shortCaptions');
     //console.log(shortFigCaptions);
@@ -165,16 +166,24 @@ const createShortSection = ()=>{
     }
 
     //console.log(next5days);
+    let imgIds = [];
+    let weatherDescriptions = [];
+    for (let i=0; i<data.length;i+=8){
+        imgIds.push(data[i].weather[0].icon);
+        weatherDescriptions.push(data[i].weather[0].description);
+    }
 
-    let imgIds = next5days.map(day=>{
-        return middleArrEl(day).weather[0].icon;
-    })
+
+
+    // let imgIds = next5days.map(day=>{
+    //     return middleArrEl(day).weather[0].icon;
+    // })
 
     //console.log(imgIds);
 
-    let weatherDescriptions = next5days.map(day=>{
-        return middleArrEl(day).weather[0].description;
-    })
+    // let weatherDescriptions = next5days.map(day=>{
+    //     return middleArrEl(day).weather[0].description;
+    // })
 
     //console.log(weatherDescriptions);
 
@@ -189,9 +198,17 @@ const createShortSection = ()=>{
         shortFigCaptions[i].innerHTML = weatherDescriptions[i];
     }
 
-
-
-
 }
 
+
+//Kliknięcie na kafelek short
+
+const weatherTileClick = function(e){
+    
+    let tileNumer = e.currentTarget.dataset.shortindex;
+    let dataId = data[tileNumer*8].dt;
+    let placeCity=document.getElementById('placeInput').value;
+    createDetailedSection(placeCity, dataId)
+    
+}
 
