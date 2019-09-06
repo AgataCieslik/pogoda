@@ -6,8 +6,8 @@ function APIRequestByGeoCoordinates(lat, lon)
     return request;
 }
 function correctPolishLetters (string) {
-    var dict = {'ą':'a','ć':'c','ę':'e','ł':'l','ń':'n','ó':'o','ś':'s','ź':'z','ż':'z', 'Ł':'L'};
-    return string.replace(/[ąćęłńóśźżŁ]/g, match => dict[match]);
+    var dict = {'ą':'a','ć':'c','ę':'e','ł':'l','ń':'n','ó':'o','ś':'s','ź':'z','ż':'z', 'Ł':'L', 'Ś':'S', 'Ż':'Z', 'Ć':'C'};
+    return string.replace(/[ąćęłńóśźżŁŚŻĆ]/g, match => dict[match]);
   }
 
 function APIRequestByCityName(city)
