@@ -20,6 +20,7 @@ function APIRequestByCityName(city)
 async function Getdata(APIpromise){
     var code = [];
     const values = [];
+    data = [];
     const body = document.querySelector('body');
     await fetch(APIpromise)
         .then( response => response.json())
@@ -28,7 +29,6 @@ async function Getdata(APIpromise){
                 return APIdata.message;
             if(APIdata !== undefined)
             {
-                data = [];
                 data.push(...APIdata.list);
                 // przykładowe dane do wykresu - Mateusz
                 x=[];
@@ -55,9 +55,15 @@ async function Getdata(APIpromise){
                     y3.push(APIdata.list[i].main.humidity);
                 };
                 getChart3();
-                // 
+                
             }
-        });
+        })
+       /*nieprzetestowanie 
+        .catch(error=>{
+            console.log('error');
+            document.getElementById('messages').style.display="block";
+            document.getElementById('APIError').style.display="block";
+        })*/
 
 }
 function ActualDate()
