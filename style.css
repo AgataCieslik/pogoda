@@ -124,6 +124,20 @@ section{
     transform: scale(1.02)
 }
 
+#sliderDiv{
+    border: 1px solid white;
+    width: 20%;
+    height: 50px;
+    box-shadow: 0 0 3px white;
+    padding: 5px;
+}
+
+#hourSlider{
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+}
+
 /*ZMIANY Mateusz*/
 
 .content {

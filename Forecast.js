@@ -33,6 +33,20 @@ const iconUrlfromId = (iconId)=>{
    return `http://openweathermap.org/img/wn/${iconId}@2x.png`
 }
 
+
+const setSliderAfterTileClick = (tileNumber)=>{
+    let weatherSlider = document.getElementById('slider');
+    let currentDate = new Date(data[0].dt_txt)
+    let currentHour = currentDate.getHours();
+    weatherSlider.value = currentHour;
+    if (tileNumber == 1){
+        weatherSlider.min = currentHour;
+    }
+    else{
+        weatherSlider.min = 0;
+    }
+}
+
 //utworzenie sekcji DetailedSection
 
 const createDetailedSection = (cityName, dataId)=>{

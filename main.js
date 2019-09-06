@@ -74,12 +74,12 @@ sub.addEventListener('click', async function(e){
 /*trzeba również dodać wybór wg daty*/
 /*trzeba rozważyć wszelakie błędy*/
 /*trzeba upewnić sie, że zajdzie walidacja przed pobraniem danych*/
-<<<<<<< HEAD
 /*trzeba przemyśleć ASYNCHRONICZNOŚĆ!!!*/
-console.log(data);
-=======
 
->>>>>>> 8692a97c8319f0fd188c7cac3e8c6ca5620f7088
+//console.log(data);
+
+
+//8692a97c8319f0fd188c7cac3e8c6ca5620f7088
 })
     
 
@@ -89,4 +89,8 @@ let weatherTiles = document.querySelectorAll('.short');
 weatherTiles.forEach(tile=>{
     tile.addEventListener('click', weatherTileClick)
 })
+
+//Obsługa slidera
+//let weatherSlider = document.getElementById('slider');
+
 
