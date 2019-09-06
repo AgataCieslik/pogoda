@@ -67,7 +67,7 @@ window.addEventListener('load', async function(e){
 sub.addEventListener('click', async function(e){
         await Getdata(APIRequestByCityName(placeInput.value));
         await createShortSection();
-        createDetailedSection(placeInput.value, data[0].dt_txt);
+        createDetailedSection(placeInput.value, data[0].dt);
 /*trzeba również dodać wybór wg daty*/
 /*trzeba rozważyć wszelakie błędy*/
 /*trzeba upewnić sie, że zajdzie walidacja przed pobraniem danych*/

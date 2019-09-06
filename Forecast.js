@@ -38,7 +38,9 @@ const iconUrlfromId = (iconId)=>{
 const createDetailedSection = (cityName, dataId)=>{
     
     let moment = data.find(el => el.dt === dataId);
-    //console.log(moment);
+    console.log('drukuje moment');
+    console.log(moment);
+
     let detailedForecast = {
         weatherDescription: moment.weather[0].description,
         weatherIcon: moment.weather[0].icon,
