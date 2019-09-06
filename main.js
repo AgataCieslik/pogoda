@@ -29,29 +29,29 @@ placeInput.addEventListener('input', function(e){
     }
 /*rozważyć polskie znaki?-w api id jest bz polskich znaków*/
 });
-const dateInput=document.getElementById('dateInput');
-dateInput.addEventListener('input', function(e){
-    let actualDate=new Date(Date.now()); 
-    let inputDate= new Date(dateInput.value);
-    let f=new Date(Date.now());
-    f.setDate(f.getDate()+5);
-    if(inputDate<actualDate || inputDate>f){
-        // document.getElementById('messagesBar').style.display="block";
-        messageSection.style.display="block";
-        document.getElementById('dateError').style.display="block";
-        errorsTypes.includes(2) ? null : errorsTypes.push(2); //dodaj błąd jeśli go nie ma
-        sub.setAttribute('disabled', 'disabled');
-    }
-    else{
-        document.getElementById('dateError').style.display="none";
-        errorsTypes = errorsTypes.filter(err => err != 2);    // usun blad z tablicy
-        if(errorsTypes.length == 0)  
-        {
-            messageSection.style.display="none";
-            sub.removeAttribute('disabled');
-        }    
-    }
-})
+// const dateInput=document.getElementById('dateInput');
+// dateInput.addEventListener('input', function(e){
+//     let actualDate=new Date(Date.now()); 
+//     let inputDate= new Date(dateInput.value);
+//     let f=new Date(Date.now());
+//     f.setDate(f.getDate()+5);
+//     if(inputDate<actualDate || inputDate>f){
+//         // document.getElementById('messagesBar').style.display="block";
+//         messageSection.style.display="block";
+//         document.getElementById('dateError').style.display="block";
+//         errorsTypes.includes(2) ? null : errorsTypes.push(2); //dodaj błąd jeśli go nie ma
+//         sub.setAttribute('disabled', 'disabled');
+//     }
+//     else{
+//         document.getElementById('dateError').style.display="none";
+//         errorsTypes = errorsTypes.filter(err => err != 2);    // usun blad z tablicy
+//         if(errorsTypes.length == 0)  
+//         {
+//             messageSection.style.display="none";
+//             sub.removeAttribute('disabled');
+//         }    
+//     }
+// })
 /*potrzebna jeszcze walidacja daty*/
 /*POBIERANIE DANYCH DLA INPUTU MIASTA*/
 
@@ -68,9 +68,28 @@ window.addEventListener('load', async function(e){
 
 //Po kliknięciu submita
 sub.addEventListener('click', async function(e){
-        await Getdata(APIRequestByCityName(placeInput.value));
-        await createShortSection();
-        createDetailedSection(placeInput.value, data[0].dt);
+        const datas = await Getdata(APIRequestByCityName(placeInput.value));
+        const errorInfo = document.getElementById("error-info");
+        const wheatherInfo = document.getElementById("wheather-info");
+        errorInfo.style.display = "none";
+        wheatherInfo.style.display = "none";
+        console.log(datas);
+        if(dataCode === "200")
+        {
+            await createShortSection();
+            createDetailedSection(placeInput.value, data[0].dt);
+            // console.log(datas);
+            CreateCharts(datas);
+            wheatherInfo.style.display = "block";
+        }
+        else
+        {
+            errorInfo.style.display = "block";
+            document.getElementById("error-type").innerHTML = dataCode;
+            document.getElementById("error-message").innerHTML = datas;
+        }
+
+        // console.log(data);
 /*trzeba również dodać wybór wg daty*/
 /*trzeba rozważyć wszelakie błędy*/
 /*trzeba upewnić sie, że zajdzie walidacja przed pobraniem danych*/

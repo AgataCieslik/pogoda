@@ -31,14 +31,14 @@
        <!---rozważyć czy zatrzymać przyciski i w jakiej roli-->
         <form class="container justify-content-center">
             <div class="row">
-                <div class="dataInput col-sm-6">
+                <div class="dataInput col-sm-12">
                     <input id="placeInput" type="text" placeholder="Twoje miasto">
-                    <button  class="clear"><span class="oi oi-delete"></span></button>
+                    <!-- <button  class="clear"><span class="oi oi-delete"></span></button> -->
                 </div>
-                <div class="dataInput col-sm-6">
+                <!-- <div class="dataInput col-sm-6">
                     <input id="dateInput" type="date">
                     <button  class="clear"><span class="oi oi-delete"></span></button>
-                </div>
+                </div> -->
             </div>
             <div class="row justify-content-center align-items-end">
                 <input id="submit" type="button" value="Sprawdź prognozy!" class="col-2">
@@ -50,7 +50,7 @@
             <button id="help"><span class="oi oi-question-mark"></span></button>
     </div>
     
-    <main>
+    <main id="wheather-info">
 
        
         <!-- <div id="messagesBar">
@@ -277,7 +277,10 @@
         </div>
         
     </main>
-    
+    <main id="error-info"> 
+        <H2 id="error-type"></H2>
+        <h4 id="error-message"></h4>
+    </main>
     <footer class="fixed-bottom">
         Pogodynka. Wykonano przez..
     </footer>

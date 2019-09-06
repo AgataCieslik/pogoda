@@ -38,8 +38,8 @@ const iconUrlfromId = (iconId)=>{
 const createDetailedSection = (cityName, dataId)=>{
     
     let moment = data.find(el => el.dt === dataId);
-    console.log('drukuje moment');
-    console.log(moment);
+    // console.log('drukuje moment');
+    // console.log(moment);
 
     let detailedForecast = {
         weatherDescription: moment.weather[0].description,
@@ -145,7 +145,7 @@ const createShortSection = ()=>{
         
     }
 
-    console.log(shortData);
+    // console.log(shortData);
 
     for(let factor in shortData){
         if (factor !== 'dayDate') shortData[factor] = shortData[factor].map(el=>el.toFixed(1));
