@@ -55,15 +55,32 @@ dateInput.addEventListener('input', function(e){
 /*potrzebna jeszcze walidacja daty*/
 /*POBIERANIE DANYCH DLA INPUTU MIASTA*/
 
+//Przy loadowaniu strony
+let defaultCity = 'Wrocław';
+window.addEventListener('load', async function(e){
+    await Getdata(APIRequestByCityName('Wrocław'));
+    console.log('logWindow');
+    console.log(data);
+    await createShortSection();
+    createDetailedSection(defaultCity, data[0].dt);
 
+});
+
+//Po kliknięciu submita
 sub.addEventListener('click', async function(e){
         await Getdata(APIRequestByCityName(placeInput.value));
         await createShortSection();
-        //uwaga: gdzieś 8 września przestanie działać:
-        createDetailedSection(1567771200);
+        createDetailedSection(placeInput.value, data[0].dt);
 /*trzeba również dodać wybór wg daty*/
 /*trzeba rozważyć wszelakie błędy*/
 /*trzeba upewnić sie, że zajdzie walidacja przed pobraniem danych*/
 
 })
     
+
+//Po kliknięciu kafelka
+
+let weatherTiles = document.querySelectorAll('.short');
+weatherTiles.forEach(tile=>{
+    tile.addEventListener('click', weatherTileClick)
+})
