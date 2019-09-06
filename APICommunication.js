@@ -39,12 +39,7 @@ async function Getdata(APIpromise){
                 
             }
         })
-       /*nieprzetestowanie 
-        .catch(error=>{
-            console.log('error');
-            document.getElementById('messages').style.display="block";
-            document.getElementById('APIError').style.display="block";
-        })*/
+       
         if(dataCode !== "200")
             return errorMessage;
         return data;

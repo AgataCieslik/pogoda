@@ -1,7 +1,6 @@
 :root{
     --bg-color1:rgba(246, 246, 248, 0.5);
     --warn-color:rgba(237, 237, 243, 0.3);
-    --main-h-color: blue;
 }
 body{
     background-image:url("background_sky/afternoon-sky.jpg");
@@ -154,8 +153,9 @@ canvas{
     max-width: 60vw;
 }
 
-#wheather-info{
+#weather-info{
     display: none;
+    padding:0;
 }
 
 #error-info{

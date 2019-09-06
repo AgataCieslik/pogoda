@@ -70,9 +70,9 @@ window.addEventListener('load', async function(e){
 sub.addEventListener('click', async function(e){
         const datas = await Getdata(APIRequestByCityName(placeInput.value));
         const errorInfo = document.getElementById("error-info");
-        const wheatherInfo = document.getElementById("wheather-info");
+        const weatherInfo = document.getElementById("weather-info");
         errorInfo.style.display = "none";
-        wheatherInfo.style.display = "none";
+        weatherInfo.style.display = "none";
         console.log(datas);
         if(dataCode === "200")
         {
@@ -80,7 +80,7 @@ sub.addEventListener('click', async function(e){
             createDetailedSection(placeInput.value, data[0].dt);
             // console.log(datas);
             CreateCharts(datas);
-            wheatherInfo.style.display = "block";
+            weatherInfo.style.display = "block";
         }
         else
         {
