@@ -72,6 +72,7 @@ sub.addEventListener('click', async function(e){
 /*trzeba rozważyć wszelakie błędy*/
 /*trzeba upewnić sie, że zajdzie walidacja przed pobraniem danych*/
 /*trzeba przemyśleć ASYNCHRONICZNOŚĆ!!!*/
+console.log(data);
 })
     
 
@@ -81,3 +82,4 @@ let weatherTiles = document.querySelectorAll('.short');
 weatherTiles.forEach(tile=>{
     tile.addEventListener('click', weatherTileClick)
 })
+

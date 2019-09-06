@@ -36,10 +36,10 @@ const iconUrlfromId = (iconId)=>{
 //utworzenie sekcji DetailedSection
 
 const createDetailedSection = (cityName, dataId)=>{
-    
+    if (cityName === ''){cityName = 'Wrocław'};
     let moment = data.find(el => el.dt === dataId);
-    console.log('drukuje moment');
-    console.log(moment);
+    
+    //console.log(moment);
 
     let detailedForecast = {
         weatherDescription: moment.weather[0].description,
