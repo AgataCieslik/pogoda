@@ -4,8 +4,11 @@ const messageSection = document.getElementById('messages');
 const sub=document.getElementById('submit');
 let errorsTypes = []; // jeśli zawiera "1" to błąd w nazwie miasta, jeśli zawiera "2" to błąd w dacie
 placeInput.addEventListener('input', function(e){
+    /*opcja altenatywna:brak możliwości wpisania polskich znaków:
+    this.value=correctPolishLetters(this.value);*/
+    let a= correctPolishLetters(this.value);
     const regW =/[^A-Za-z_]/ ;
-    const matchError = regW.exec(this.value);
+    const matchError = regW.exec(a);
     if(matchError!==null){
         // document.getElementById('messagesBar').style.display="block";
         messageSection.style.display="block";
@@ -71,8 +74,12 @@ sub.addEventListener('click', async function(e){
 /*trzeba również dodać wybór wg daty*/
 /*trzeba rozważyć wszelakie błędy*/
 /*trzeba upewnić sie, że zajdzie walidacja przed pobraniem danych*/
+<<<<<<< HEAD
 /*trzeba przemyśleć ASYNCHRONICZNOŚĆ!!!*/
 console.log(data);
+=======
+
+>>>>>>> 8692a97c8319f0fd188c7cac3e8c6ca5620f7088
 })
     
 
