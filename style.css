@@ -4,7 +4,7 @@
     --main-h-color: blue;
 }
 body{
-    background-image:url("background_sky/afternoon-sky.jpg");
+    background-image:url("background_sky/dzien.jpg");
     background-size:cover;
     font-family:'Open Sans',sans-serif;
     color: black;
@@ -147,6 +147,8 @@ section{
     width: auto;
     cursor: pointer;
 }
+
+
 
 /*ZMIANY Mateusz*/
 

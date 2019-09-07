@@ -29,29 +29,33 @@ placeInput.addEventListener('input', function(e){
     }
 /*rozważyć polskie znaki?-w api id jest bz polskich znaków*/
 });
-const dateInput=document.getElementById('dateInput');
-dateInput.addEventListener('input', function(e){
-    let actualDate=new Date(Date.now()); 
-    let inputDate= new Date(dateInput.value);
-    let f=new Date(Date.now());
-    f.setDate(f.getDate()+5);
-    if(inputDate<actualDate || inputDate>f){
-        // document.getElementById('messagesBar').style.display="block";
-        messageSection.style.display="block";
-        document.getElementById('dateError').style.display="block";
-        errorsTypes.includes(2) ? null : errorsTypes.push(2); //dodaj błąd jeśli go nie ma
-        sub.setAttribute('disabled', 'disabled');
-    }
-    else{
-        document.getElementById('dateError').style.display="none";
-        errorsTypes = errorsTypes.filter(err => err != 2);    // usun blad z tablicy
-        if(errorsTypes.length == 0)  
-        {
-            messageSection.style.display="none";
-            sub.removeAttribute('disabled');
-        }    
-    }
-})
+
+
+// const dateInput=document.getElementById('dateInput');
+// dateInput.addEventListener('input', function(e){
+//     let actualDate=new Date(Date.now()); 
+//     let inputDate= new Date(dateInput.value);
+//     let f=new Date(Date.now());
+//     f.setDate(f.getDate()+5);
+//     if(inputDate<actualDate || inputDate>f){
+//         // document.getElementById('messagesBar').style.display="block";
+//         messageSection.style.display="block";
+//         document.getElementById('dateError').style.display="block";
+//         errorsTypes.includes(2) ? null : errorsTypes.push(2); //dodaj błąd jeśli go nie ma
+//         sub.setAttribute('disabled', 'disabled');
+//     }
+//     else{
+//         document.getElementById('dateError').style.display="none";
+//         errorsTypes = errorsTypes.filter(err => err != 2);    // usun blad z tablicy
+//         if(errorsTypes.length == 0)  
+//         {
+//             messageSection.style.display="none";
+//             sub.removeAttribute('disabled');
+//         }    
+//     }
+// })
+
+
 /*potrzebna jeszcze walidacja daty*/
 /*POBIERANIE DANYCH DLA INPUTU MIASTA*/
 
@@ -64,6 +68,7 @@ window.addEventListener('load', async function(e){
     await Getdata(APIRequestByCityName('Wrocław'));
     await createShortSection();
     let currentHour = await getCurrentHour(data);
+    slider.min = currentHour;
     slider.value = currentHour;
     createDetailedSection(defaultCity, data[0].dt);
 });
@@ -104,7 +109,9 @@ let leftArrow = document.getElementById('leftArrow');
 let rightArrow = document.getElementById('rightArrow');
 
 leftArrow.addEventListener('click',(e)=>{
-    if(slider.value>(new Date(data[0].dt_txt)).getHours()) slider.value -= 3;
+    if(slider.value>slider.min) {
+        slider.value -= 3
+    };
     let forecastHeader = document.getElementById('detailedHeader');
     forecastHeader.querySelector('b').innerHTML = `${slider.value}:00`
     createDetailedSection(placeInput.value, dataIdfromSlider());
