@@ -1,3 +1,13 @@
+const day = {
+    image: 'url("background_sky/dzien.jpg")',
+    dimness: "rgba(220,170,200, 0.3)"
+}
+const night = {
+    image: 'url("background_sky/noc.jpg")',
+    dimness: "rgba(15,15,36,0.3)"
+}
+let theme;
+
 /*WALIDACJA*/
 const placeInput=document.getElementById('placeInput');
 const messageSection = document.getElementById('messages');
@@ -23,45 +33,19 @@ placeInput.addEventListener('input', function(e){
         {
             messageSection.style.display="none";
             sub.removeAttribute('disabled');
-        }      
-
-            // document.getElementById('messagesBar').style.display="none";  
+        }  
     }
 /*rozważyć polskie znaki?-w api id jest bz polskich znaków*/
 });
-// const dateInput=document.getElementById('dateInput');
-// dateInput.addEventListener('input', function(e){
-//     let actualDate=new Date(Date.now()); 
-//     let inputDate= new Date(dateInput.value);
-//     let f=new Date(Date.now());
-//     f.setDate(f.getDate()+5);
-//     if(inputDate<actualDate || inputDate>f){
-//         // document.getElementById('messagesBar').style.display="block";
-//         messageSection.style.display="block";
-//         document.getElementById('dateError').style.display="block";
-//         errorsTypes.includes(2) ? null : errorsTypes.push(2); //dodaj błąd jeśli go nie ma
-//         sub.setAttribute('disabled', 'disabled');
-//     }
-//     else{
-//         document.getElementById('dateError').style.display="none";
-//         errorsTypes = errorsTypes.filter(err => err != 2);    // usun blad z tablicy
-//         if(errorsTypes.length == 0)  
-//         {
-//             messageSection.style.display="none";
-//             sub.removeAttribute('disabled');
-//         }    
-//     }
-// })
-/*potrzebna jeszcze walidacja daty*/
 /*POBIERANIE DANYCH DLA INPUTU MIASTA*/
-
 //Przy loadowaniu strony
 let slider = document.getElementById('hourSlider');
 let defaultCity = 'Wrocław';
 
 
 window.addEventListener('load', async function(e){
-    await Getdata(APIRequestByCityName('Wrocław'));
+    themeDependsOnHour();
+    await Getdata(APIRequestByCityName('Wrocław'));    
     await createShortSection();
     let currentHour = await getCurrentHour(data);
     slider.min = currentHour;
@@ -69,7 +53,12 @@ window.addEventListener('load', async function(e){
     createDetailedSection(defaultCity, data[0].dt);
 });
 
+function themeDependsOnHour(){
+    isNight() ? theme = night : theme = day;
 
+    const backgound = document.getElementById("background");
+    backgound.style.backgroundImage = theme.image;
+}
 
 //Po kliknięciu submita
 sub.addEventListener('click', async function(e){
@@ -93,20 +82,8 @@ sub.addEventListener('click', async function(e){
             document.getElementById("error-type").innerHTML = dataCode;
             document.getElementById("error-message").innerHTML = datas;
         }
-
-        // console.log(data);
-/*trzeba również dodać wybór wg daty*/
-/*trzeba rozważyć wszelakie błędy*/
-/*trzeba upewnić sie, że zajdzie walidacja przed pobraniem danych*/
-/*trzeba przemyśleć ASYNCHRONICZNOŚĆ!!!*/
-
-//console.log(data);
-
-
-//8692a97c8319f0fd188c7cac3e8c6ca5620f7088
 })
     
-
 //Po kliknięciu kafelka
 
 let weatherTiles = document.querySelectorAll('.short');
@@ -126,7 +103,7 @@ let rightArrow = document.getElementById('rightArrow');
 leftArrow.addEventListener('click',(e)=>{
     if(slider.value>slider.min) {
         slider.value -= 3
-    };
+    }
     let forecastHeader = document.getElementById('detailedHeader');
     forecastHeader.querySelector('b').innerHTML = `${slider.value}:00`
     createDetailedSection(placeInput.value, dataIdfromSlider());
@@ -139,3 +116,9 @@ rightArrow.addEventListener('click',e=>{
     createDetailedSection(placeInput.value, dataIdfromSlider());
 })
 
+function isNight(){
+    const actualHour = new Date().getHours();
+    if(actualHour >= 21 || actualHour <=6) 
+        return true;
+    return false;
+}
