@@ -7,7 +7,7 @@ placeInput.addEventListener('input', function(e){
     /*opcja altenatywna:brak możliwości wpisania polskich znaków:
     this.value=correctPolishLetters(this.value);*/
     let a= correctPolishLetters(this.value);
-    const regW =/[^A-Za-z_]/ ;
+    const regW =/[^A-Za-z_\s]/ ;
     const matchError = regW.exec(a);
     if(matchError!==null){
         // document.getElementById('messagesBar').style.display="block";
