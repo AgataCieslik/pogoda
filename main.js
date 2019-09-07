@@ -56,15 +56,19 @@ dateInput.addEventListener('input', function(e){
 /*POBIERANIE DANYCH DLA INPUTU MIASTA*/
 
 //Przy loadowaniu strony
+let slider = document.getElementById('hourSlider');
 let defaultCity = 'Wrocław';
+
+
 window.addEventListener('load', async function(e){
     await Getdata(APIRequestByCityName('Wrocław'));
-    console.log('logWindow');
-    console.log(data);
     await createShortSection();
+    let currentHour = await getCurrentHour(data);
+    slider.value = currentHour;
     createDetailedSection(defaultCity, data[0].dt);
-
 });
+
+
 
 //Po kliknięciu submita
 sub.addEventListener('click', async function(e){
@@ -74,7 +78,12 @@ sub.addEventListener('click', async function(e){
 /*trzeba również dodać wybór wg daty*/
 /*trzeba rozważyć wszelakie błędy*/
 /*trzeba upewnić sie, że zajdzie walidacja przed pobraniem danych*/
+/*trzeba przemyśleć ASYNCHRONICZNOŚĆ!!!*/
 
+//console.log(data);
+
+
+//8692a97c8319f0fd188c7cac3e8c6ca5620f7088
 })
     
 
@@ -82,5 +91,29 @@ sub.addEventListener('click', async function(e){
 
 let weatherTiles = document.querySelectorAll('.short');
 weatherTiles.forEach(tile=>{
-    tile.addEventListener('click', weatherTileClick)
+    tile.addEventListener('click', weatherTileClick);
+    tile.addEventListener('click', setSliderAfterTileClick);
 })
+
+//Obsługa slidera
+slider.addEventListener('change', usingSlider)
+
+//strzałki do slidera
+
+let leftArrow = document.getElementById('leftArrow');
+let rightArrow = document.getElementById('rightArrow');
+
+leftArrow.addEventListener('click',(e)=>{
+    if(slider.value>(new Date(data[0].dt_txt)).getHours()) slider.value -= 3;
+    let forecastHeader = document.getElementById('detailedHeader');
+    forecastHeader.querySelector('b').innerHTML = `${slider.value}:00`
+    createDetailedSection(placeInput.value, dataIdfromSlider());
+})
+
+rightArrow.addEventListener('click',e=>{
+    if(slider.value<=21) slider.value = -1*(-1*slider.value-3);
+    let forecastHeader = document.getElementById('detailedHeader');
+    forecastHeader.querySelector('b').innerHTML = `${slider.value}:00`;
+    createDetailedSection(placeInput.value, dataIdfromSlider());
+})
+

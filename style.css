@@ -88,6 +88,7 @@ section{
 
 /* Prognoza ogólna */
 
+
 .short{
     text-align: center;
     margin: 10px;
@@ -122,6 +123,29 @@ section{
     border: 1px solid white;
     box-shadow: 0 0 3px white;
     transform: scale(1.02)
+}
+
+#sliderDiv{
+    display: flex;
+    border: 1px solid white;
+    min-width: 200px;
+    max-width: 25%;
+    height: 50px;
+    box-shadow: 0 0 3px white;
+    padding: 5px;
+}
+
+#hourSlider{
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+}
+
+#leftArrow, #rightArrow{
+    display: inline-block;
+    height: 100%;
+    width: auto;
+    cursor: pointer;
 }
 
 /*ZMIANY Mateusz*/

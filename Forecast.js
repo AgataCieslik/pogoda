@@ -3,6 +3,13 @@
 
 //funkcje pomocnicze
 
+const getCurrentHour = async (arr)=>{
+    let currentDate = new Date(arr[0].dt_txt);
+    let currentHour = currentDate.getHours();
+    return currentHour;
+    slider.value = currentHour;
+}
+
 const dayName = (dayNr)=>{
     switch(dayNr){
         case 0:
@@ -33,13 +40,46 @@ const iconUrlfromId = (iconId)=>{
    return `http://openweathermap.org/img/wn/${iconId}@2x.png`
 }
 
+//slider functions
+
+const setSliderAfterTileClick = (e)=>{
+    let weatherSlider = document.getElementById('hourSlider');
+    let currentDate = new Date(data[0].dt_txt)
+    let currentHour = currentDate.getHours();
+    weatherSlider.value = currentHour;
+    tileNumber = e.currentTarget.dataset.shortindex;
+    if (tileNumber == 0){
+        weatherSlider.min = currentHour;
+    }
+    else{
+        weatherSlider.min = 0;
+    }
+    weatherSlider.dataset.tilenumber = tileNumber;
+}
+
+
+const dataIdfromSlider = ()=>{
+    let slider = document.getElementById('hourSlider');
+    let tileNumer = slider.dataset.tilenumber;
+    let currentHour = (new Date(data[0].dt_txt)).getHours();
+    return data[tileNumer*8+(slider.value-currentHour)/3].dt;
+}
+
+const usingSlider = function(e){
+    let forecastHeader = document.getElementById('detailedHeader');
+    forecastHeader.querySelector('b').innerHTML = `${e.target.value}:00`;
+    createDetailedSection(placeInput.value, dataIdfromSlider());
+}
+
+
+
 //utworzenie sekcji DetailedSection
 
 const createDetailedSection = (cityName, dataId)=>{
-    
+    if (cityName === ''){cityName = 'Wrocław'};
     let moment = data.find(el => el.dt === dataId);
-    console.log('drukuje moment');
-    console.log(moment);
+    
+    //console.log(moment);
 
     let detailedForecast = {
         weatherDescription: moment.weather[0].description,
@@ -92,7 +132,15 @@ const createDetailedSection = (cityName, dataId)=>{
     </figure>
     `
     let forecastHeader = document.getElementById('detailedHeader');
-    forecastHeader.innerHTML = `Dane dla miasta: ${cityName}     ${moment.dt_txt}`
+
+    let date = new Date(moment.dt_txt);
+    let hour = date.getHours();
+    let day = date.getDate()+1;
+    let month =date.getMonth()+1;
+    //if(hour<10){hour = '0' + hour};
+    if(day<10){day = '0' + day};
+    if(month<10){month = '0' + month}; 
+    forecastHeader.innerHTML = `${cityName}     ${day}.${month}<br>Godzina: <b>${hour}:00</br>`;
 }
 
 
@@ -145,7 +193,7 @@ const createShortSection = ()=>{
         
     }
 
-    console.log(shortData);
+    //console.log(shortData);
 
     for(let factor in shortData){
         if (factor !== 'dayDate') shortData[factor] = shortData[factor].map(el=>el.toFixed(1));
@@ -210,7 +258,11 @@ const weatherTileClick = function(e){
     let tileNumer = e.currentTarget.dataset.shortindex;
     let dataId = data[tileNumer*8].dt;
     let placeCity=document.getElementById('placeInput').value;
-    createDetailedSection(placeCity, dataId)
+    createDetailedSection(placeCity, dataId);
+
     
 }
+
+
+
 
