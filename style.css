@@ -1,7 +1,6 @@
 :root{
     --bg-color1:rgba(246, 246, 248, 0.5);
     --warn-color:rgba(237, 237, 243, 0.3);
-    --main-h-color: blue;
 }
 body{
     background-image:url("background_sky/dzien.jpg");
@@ -29,7 +28,6 @@ div.dataInput{
     padding:1.5em;
     padding-bottom:1.5em;
     text-align:center;
-
 }
 input{
     border:0;
@@ -43,6 +41,9 @@ button{
 header button{
     margin-left:auto;
     font-size:1.5em;
+}
+#submit:hover{
+    background: rgb(184, 184, 216);
 }
 .bar button{
     padding:0.5rem;
@@ -178,3 +179,11 @@ canvas{
     max-width: 60vw;
 }
 
+#weather-info{
+    display: none;
+    padding:0;
+}
+
+#error-info{
+    display:none;
+}

@@ -57,33 +57,61 @@ let y =[];
                
                 }
             }
-        });}
+        });
+    }
     
-        function getChart3(){
-            const ctx = document.getElementById('chart3').getContext('2d');
-            const chart = new Chart(ctx, {
-                type: 'line',
-            
-                data: {
-                    labels: x3,
-                    datasets: [{
-                        label: 'Wilgotność',
-                        fill: false,
-                        backgroundColor: '#bbb',
-                        borderColor: '#555',
-                        data: y3 
-                    }]
+    function getChart3(){
+        const ctx = document.getElementById('chart3').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'line',
+        
+            data: {
+                labels: x3,
+                datasets: [{
+                    label: 'Wilgotność',
+                    fill: false,
+                    backgroundColor: '#bbb',
+                    borderColor: '#555',
+                    data: y3 
+                }]
+            },
+        
+            options: {
+                title:{
+                    display: true,
+                    text: 'Wilgotność [%]',
+                    fontSize: 20
                 },
-            
-                options: {
-                   title:{
-                       display: true,
-                       text: 'Wilgotność [%]',
-                       fontSize: 20
-                   },
-                   legend: {
-                    display: false
-                   
-                    }
+                legend: {
+                display: false
+                
                 }
-            });}
+            }
+        });
+    }
+    function CreateCharts(dataList){
+        x=[];
+        y=[];
+        for(let i=0; i<10; i++){
+
+            x.push(dataList[i].dt_txt.substr(0,16));
+            y.push(dataList[i].main.temp);
+        };
+        getChart();
+
+        x2=[];
+        y2=[];
+        for(let i=0; i<10; i++){
+            x2.push(dataList[i].dt_txt.substr(0,16));
+            y2.push(dataList[i].main.pressure);
+        };
+        getChart2();
+
+        x3=[];
+        y3=[];
+        for(let i=0; i<10; i++){
+            x3.push(dataList[i].dt_txt.substr(0,16));
+            y3.push(dataList[i].main.humidity);
+        };
+        getChart3();
+    }

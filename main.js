@@ -7,7 +7,7 @@ placeInput.addEventListener('input', function(e){
     /*opcja altenatywna:brak możliwości wpisania polskich znaków:
     this.value=correctPolishLetters(this.value);*/
     let a= correctPolishLetters(this.value);
-    const regW =/[^A-Za-z_]/ ;
+    const regW =/[^A-Za-z_\s]/ ;
     const matchError = regW.exec(a);
     if(matchError!==null){
         // document.getElementById('messagesBar').style.display="block";
@@ -29,8 +29,6 @@ placeInput.addEventListener('input', function(e){
     }
 /*rozważyć polskie znaki?-w api id jest bz polskich znaków*/
 });
-
-
 // const dateInput=document.getElementById('dateInput');
 // dateInput.addEventListener('input', function(e){
 //     let actualDate=new Date(Date.now()); 
@@ -54,8 +52,6 @@ placeInput.addEventListener('input', function(e){
 //         }    
 //     }
 // })
-
-
 /*potrzebna jeszcze walidacja daty*/
 /*POBIERANIE DANYCH DLA INPUTU MIASTA*/
 
@@ -77,9 +73,28 @@ window.addEventListener('load', async function(e){
 
 //Po kliknięciu submita
 sub.addEventListener('click', async function(e){
-        await Getdata(APIRequestByCityName(placeInput.value));
-        await createShortSection();
-        createDetailedSection(placeInput.value, data[0].dt);
+        const datas = await Getdata(APIRequestByCityName(placeInput.value));
+        const errorInfo = document.getElementById("error-info");
+        const weatherInfo = document.getElementById("weather-info");
+        errorInfo.style.display = "none";
+        weatherInfo.style.display = "none";
+        console.log(datas);
+        if(dataCode === "200")
+        {
+            await createShortSection();
+            createDetailedSection(placeInput.value, data[0].dt);
+            // console.log(datas);
+            CreateCharts(datas);
+            weatherInfo.style.display = "block";
+        }
+        else
+        {
+            errorInfo.style.display = "block";
+            document.getElementById("error-type").innerHTML = dataCode;
+            document.getElementById("error-message").innerHTML = datas;
+        }
+
+        // console.log(data);
 /*trzeba również dodać wybór wg daty*/
 /*trzeba rozważyć wszelakie błędy*/
 /*trzeba upewnić sie, że zajdzie walidacja przed pobraniem danych*/
