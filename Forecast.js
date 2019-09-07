@@ -135,7 +135,7 @@ const createDetailedSection = (cityName, dataId)=>{
 
     let date = new Date(moment.dt_txt);
     let hour = date.getHours();
-    let day = date.getDate()+1;
+    let day = date.getDate();
     let month =date.getMonth()+1;
     //if(hour<10){hour = '0' + hour};
     if(day<10){day = '0' + day};

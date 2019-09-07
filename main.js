@@ -78,7 +78,7 @@ sub.addEventListener('click', async function(e){
         const weatherInfo = document.getElementById("weather-info");
         errorInfo.style.display = "none";
         weatherInfo.style.display = "none";
-        console.log(datas);
+        // console.log(datas);
         if(dataCode === "200")
         {
             await createShortSection();
