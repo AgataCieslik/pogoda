@@ -1,10 +1,11 @@
+let shortMarked; // zaznaczony dzieńw prognozie na najb. dni 
+
 //funkcje pomocnicze
 
 const getCurrentHour = async (arr)=>{
     let currentDate = new Date(arr[0].dt_txt);
     let currentHour = currentDate.getHours();
     return currentHour;
-    slider.value = currentHour;
 }
 
 const dayName = (dayNr)=>{
@@ -193,7 +194,7 @@ const createShortSection = ()=>{
         weatherDescriptions.push(data[i].weather[0].description);
     }
 
-    for(let i=0; i<5; i++){
+    for(let i=0; i<shortTemperatureTags.length; i++){
         shortTemperatureTags[i].innerHTML = `${shortData.temperature[i]}°C`;
         shortPressureTags[i].innerHTML = `${shortData.pressure[i]}hPa`;
         shortHumidityTags[i].innerHTML = `${shortData.humidity[i]}%`;
@@ -202,19 +203,19 @@ const createShortSection = ()=>{
         shortImages[i].src = iconUrlfromId(imgIds[i]);
         shortFigCaptions[i].innerHTML = weatherDescriptions[i];
     }
-    document.querySelector(".short").style.backgroundColor = theme.dimness;
+    shortMarked = document.querySelector(".short");
+    shortMarked.style.backgroundColor = theme.dimness;
 }
 
 //Kliknięcie na kafelek short
 
 const weatherTileClick = function(e){
-    
-    const short = document.querySelectorAll(".short");
-    short.forEach(s => s.style.backgroundColor = "rgba(220,170,200, 0.0)");
+    shortMarked.style.backgroundColor = "rgba(220,170,200, 0.0)";
     let tileNumer = e.currentTarget.dataset.shortindex;
     let dataId = data[tileNumer*8].dt;
     let placeCity=document.getElementById('placeInput').value;
     e.currentTarget.style.backgroundColor = theme.dimness;
+    shortMarked = e.currentTarget;
     createDetailedSection(placeCity, dataId);    
 }
 

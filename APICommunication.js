@@ -1,4 +1,3 @@
-
 let data = [];
 let dataCode = 0;
 function APIRequestByGeoCoordinates(lat, lon) 
@@ -33,13 +32,8 @@ async function Getdata(APIpromise){
                 return;   
             }
             if(APIdata !== undefined)
-            {
                 data.push(...APIdata.list);
-                // przykładowe dane do wykresu - Mateusz
-                
-            }
         })
-       
         if(dataCode !== "200")
             return errorMessage;
         return data;
@@ -56,22 +50,5 @@ function ActualDate()
 
 function GetDataForDay(date, table)
 {
-    //d.dt_txt.includes(date)
-    //console.log(table);
-    //console.log(date);
     return table.filter(q => q.dt_txt.includes(date));
 }
-
-
-
- //Getdata(APIRequestByCityName('London'));
-//console.log(data);
-//console.log(data);
-/*let date = new Date();
-console.log(date);
-
-
-
-const d = ActuallDate();
-let dd = GetDataForDay(d, data)*/
-

@@ -1,8 +1,8 @@
-const day = {
+const dayTheme = {
     image: 'url("background_sky/dzien.jpg")',
     dimness: "rgba(220,170,200, 0.3)"
 }
-const night = {
+const nightTheme = {
     image: 'url("background_sky/noc.jpg")',
     dimness: "rgba(15,15,36,0.3)"
 }
@@ -13,9 +13,8 @@ const placeInput=document.getElementById('placeInput');
 const messageSection = document.getElementById('messages');
 const sub=document.getElementById('submit');
 let errorsTypes = []; // jeśli zawiera "1" to błąd w nazwie miasta, jeśli zawiera "2" to błąd w dacie
+
 placeInput.addEventListener('input', function(e){
-    /*opcja altenatywna:brak możliwości wpisania polskich znaków:
-    this.value=correctPolishLetters(this.value);*/
     let a= correctPolishLetters(this.value);
     const regW =/[^A-Za-z_\s]/ ;
     const matchError = regW.exec(a);
@@ -35,27 +34,15 @@ placeInput.addEventListener('input', function(e){
             sub.removeAttribute('disabled');
         }  
     }
-/*rozważyć polskie znaki?-w api id jest bz polskich znaków*/
 });
-/*POBIERANIE DANYCH DLA INPUTU MIASTA*/
 //Przy loadowaniu strony
 let slider = document.getElementById('hourSlider');
-let defaultCity = 'Wrocław';
-
-
 window.addEventListener('load', async function(e){
     themeDependsOnHour();
-    await Getdata(APIRequestByCityName('Wrocław'));    
-    await createShortSection();
-    let currentHour = await getCurrentHour(data);
-    slider.min = currentHour;
-    slider.value = currentHour;
-    createDetailedSection(defaultCity, data[0].dt);
 });
 
 function themeDependsOnHour(){
-    isNight() ? theme = night : theme = day;
-
+    isNight() ? theme = nightTheme : theme = dayTheme;
     const backgound = document.getElementById("background");
     backgound.style.backgroundImage = theme.image;
 }
@@ -67,12 +54,10 @@ sub.addEventListener('click', async function(e){
         const weatherInfo = document.getElementById("weather-info");
         errorInfo.style.display = "none";
         weatherInfo.style.display = "none";
-        // console.log(datas);
         if(dataCode === "200")
         {
             await createShortSection();
             createDetailedSection(placeInput.value, data[0].dt);
-            // console.log(datas);
             CreateCharts(datas);
             weatherInfo.style.display = "block";
         }

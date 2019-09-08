@@ -4,8 +4,7 @@ const chartColor = 'black';
 function getChart(){
     const ctx = document.getElementById('chart').getContext('2d');
     const chart = new Chart(ctx, {
-        type: 'line',
-    
+        type: 'line',    
         data: {
             labels: x,
             datasets: [{
@@ -23,8 +22,7 @@ function getChart(){
                fontSize: 20
            },
            legend: {
-            display: false
-           
+            display: false           
             }
         }
     });
@@ -33,8 +31,7 @@ function getChart(){
 function getChart2(){
     const ctx = document.getElementById('chart2').getContext('2d');
     const chart = new Chart(ctx, {
-        type: 'line',
-    
+        type: 'line',    
         data: {
             labels: x2,
             datasets: [{
@@ -56,13 +53,11 @@ function getChart2(){
             }
         }
     });
-}
-    
+}    
 function getChart3(){
     const ctx = document.getElementById('chart3').getContext('2d');
     const chart = new Chart(ctx, {
-        type: 'line',
-    
+        type: 'line',    
         data: {
             labels: x3,
             datasets: [{
@@ -80,7 +75,7 @@ function getChart3(){
                 fontSize: 20
             },
             legend: {
-            display: false            
+                display: false            
             }
         }
     });
@@ -88,25 +83,24 @@ function getChart3(){
 function CreateCharts(dataList){
     x=[];
     y=[];
-    for(let i=0; i<10; i++){
-
-        x.push(dataList[i].dt_txt.substr(0,16));
+    for(let i=0; i<9; i++){
+        x.push(dataList[i].dt_txt.substr(5,11));
         y.push(dataList[i].main.temp);
     };
     getChart();
 
     x2=[];
     y2=[];
-    for(let i=0; i<10; i++){
-        x2.push(dataList[i].dt_txt.substr(0,16));
+    for(let i=0; i<9; i++){
+        x2.push(dataList[i].dt_txt.substr(5,11));
         y2.push(dataList[i].main.pressure);
     };
     getChart2();
 
     x3=[];
     y3=[];
-    for(let i=0; i<10; i++){
-        x3.push(dataList[i].dt_txt.substr(0,16));
+    for(let i=0; i<9; i++){
+        x3.push(dataList[i].dt_txt.substr(5,11));
         y3.push(dataList[i].main.humidity);
     };
     getChart3();
