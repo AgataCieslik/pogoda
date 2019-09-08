@@ -1,11 +1,6 @@
-let data = [];
-let dataCode = 0;
-function APIRequestByGeoCoordinates(lat, lon) 
-{
-    let  request =  `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&APPID=aa89918a50010961a10dfbbee0781cb1&units=metric`;
-    return request;
-}
-function correctPolishLetters (string) {
+export let data = [];
+export let dataCode = 0;
+export function correctPolishLetters (string) {
     var dict = {'ą':'a','ć':'c','ę':'e','ł':'l','ń':'n','ó':'o','ś':'s','ź':'z','ż':'z', 'Ą':'A','Ć':'C','Ę':'E','Ł':'L','Ń':'N','Ó':'O', 'Ś':'S','Ź':'Z', 'Ż':'Z'};
     return string.replace(/[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]/g, match => dict[match]);
   }
@@ -17,7 +12,8 @@ function APIRequestByCityName(city)
 }
 /*Język przestawiony w api na polski (&lang={pl}), ale nie zawuażyłam zmiany */
 
-async function Getdata(APIpromise){
+export async function Getdata(city){
+    let APIpromise = APIRequestByCityName(city);
     let errorMessage = "";
     dataCode = 0;
     data = [];
@@ -37,18 +33,4 @@ async function Getdata(APIpromise){
         if(dataCode !== "200")
             return errorMessage;
         return data;
-}
-function ActualDate()
-{
-    const date = new Date();
-    const noMonth = date.getMonth() + 1;
-    const noDay = date.getDate();
-    const month = noMonth >= 10 ? noMonth : `0${noMonth}`;
-    const day = noDay >= 10 ? noDay : `0${noDay}`;
-    return `${date.getFullYear()}-${month}-${day}`;
-}
-
-function GetDataForDay(date, table)
-{
-    return table.filter(q => q.dt_txt.includes(date));
 }

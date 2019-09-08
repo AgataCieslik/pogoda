@@ -1,5 +1,9 @@
 let x =[];
 let y =[];
+let x2 =[];
+let y2=[];
+let x3 =[];
+let y3 =[];
 const chartColor = 'black';
 function getChart(){
     const ctx = document.getElementById('chart').getContext('2d');
@@ -80,7 +84,7 @@ function getChart3(){
         }
     });
 }
-function CreateCharts(dataList){
+export function CreateCharts(dataList){
     x=[];
     y=[];
     for(let i=0; i<9; i++){
