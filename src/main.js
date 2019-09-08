@@ -1,12 +1,14 @@
-const dayTheme = {
-    image: 'url("background_sky/dzien.jpg")',
-    dimness: "rgba(220,170,200, 0.3)"
-}
-const nightTheme = {
-    image: 'url("background_sky/noc.jpg")',
-    dimness: "rgba(15,15,36,0.3)"
-}
-let theme;
+
+import { weatherTileClick } from './Forecast.js';
+import { setSliderAfterTileClick } from './Forecast.js';
+import { usingSlider } from './Forecast.js';
+import { correctPolishLetters } from "./APICommunication.js";
+import { Getdata } from "./APICommunication.js";
+import { dataCode } from "./APICommunication.js";
+import { createShortSection } from "./Forecast.js";
+import { createDetailedSection } from "./Forecast";
+import { CreateCharts } from "./chart.js";
+import { dataIdfromSlider } from "./Forecast.js";
 
 /*WALIDACJA*/
 const placeInput=document.getElementById('placeInput');
@@ -37,27 +39,18 @@ placeInput.addEventListener('input', function(e){
 });
 //Przy loadowaniu strony
 let slider = document.getElementById('hourSlider');
-window.addEventListener('load', async function(e){
-    themeDependsOnHour();
-});
-
-function themeDependsOnHour(){
-    isNight() ? theme = nightTheme : theme = dayTheme;
-    const backgound = document.getElementById("background");
-    backgound.style.backgroundImage = theme.image;
-}
 
 //Po kliknięciu submita
 sub.addEventListener('click', async function(e){
-        const datas = await Getdata(APIRequestByCityName(placeInput.value));
+        const datas = await Getdata(placeInput.value);
         const errorInfo = document.getElementById("error-info");
         const weatherInfo = document.getElementById("weather-info");
         errorInfo.style.display = "none";
         weatherInfo.style.display = "none";
         if(dataCode === "200")
         {
-            await createShortSection();
-            createDetailedSection(placeInput.value, data[0].dt);
+            await createShortSection(datas);
+            createDetailedSection(placeInput.value, datas[0].dt);
             CreateCharts(datas);
             weatherInfo.style.display = "block";
         }
@@ -91,19 +84,12 @@ leftArrow.addEventListener('click',(e)=>{
     }
     let forecastHeader = document.getElementById('detailedHeader');
     forecastHeader.querySelector('b').innerHTML = `${slider.value}:00`
-    createDetailedSection(placeInput.value, dataIdfromSlider());
+    createDetailedSection(placeInput.value, (dataIdfromSlider()));
 })
 
 rightArrow.addEventListener('click',e=>{
     if(slider.value<=21) slider.value = -1*(-1*slider.value-3);
     let forecastHeader = document.getElementById('detailedHeader');
     forecastHeader.querySelector('b').innerHTML = `${slider.value}:00`;
-    createDetailedSection(placeInput.value, dataIdfromSlider());
+    createDetailedSection(placeInput.value, (dataIdfromSlider()));
 })
-
-function isNight(){
-    const actualHour = new Date().getHours();
-    if(actualHour >= 21 || actualHour <=6) 
-        return true;
-    return false;
-}

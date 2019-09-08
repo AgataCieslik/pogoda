@@ -1,12 +1,9 @@
+import { theme } from "./theme";
+import { data } from "./APICommunication";
+
 let shortMarked; // zaznaczony dzieńw prognozie na najb. dni 
 
 //funkcje pomocnicze
-
-const getCurrentHour = async (arr)=>{
-    let currentDate = new Date(arr[0].dt_txt);
-    let currentHour = currentDate.getHours();
-    return currentHour;
-}
 
 const dayName = (dayNr)=>{
     switch(dayNr){
@@ -33,12 +30,12 @@ const iconUrlfromId = (iconId)=>{
 
 //slider functions
 
-const setSliderAfterTileClick = (e)=>{
+export const setSliderAfterTileClick = (e)=>{
     let weatherSlider = document.getElementById('hourSlider');
     let currentDate = new Date(data[0].dt_txt)
     let currentHour = currentDate.getHours();
     weatherSlider.value = currentHour;
-    tileNumber = e.currentTarget.dataset.shortindex;
+    let tileNumber = e.currentTarget.dataset.shortindex;
     if (tileNumber == 0){
         weatherSlider.min = currentHour;
     }
@@ -48,14 +45,14 @@ const setSliderAfterTileClick = (e)=>{
     weatherSlider.dataset.tilenumber = tileNumber;
 }
 
-const dataIdfromSlider = ()=>{
+export const dataIdfromSlider = ()=>{
     let slider = document.getElementById('hourSlider');
     let tileNumer = slider.dataset.tilenumber;
     let currentHour = (new Date(data[0].dt_txt)).getHours();
     return data[tileNumer*8+(slider.value-currentHour)/3].dt;
 }
 
-const usingSlider = function(e){
+export const usingSlider = function(e){
     let forecastHeader = document.getElementById('detailedHeader');
     forecastHeader.querySelector('b').innerHTML = `${e.target.value}:00`;
     createDetailedSection(placeInput.value, dataIdfromSlider());
@@ -63,7 +60,7 @@ const usingSlider = function(e){
 
 //utworzenie sekcji DetailedSection
 
-const createDetailedSection = (cityName, dataId)=>{
+export const createDetailedSection = (cityName, dataId)=>{
     if (cityName === ''){cityName = 'Wrocław'};
     let moment = data.find(el => el.dt === dataId);
 
@@ -127,7 +124,7 @@ const createDetailedSection = (cityName, dataId)=>{
 }
 
 //utworzenie sekcji ShortSection
-const createShortSection = ()=>{
+export const createShortSection = (data)=>{
 
     let next5days = [];
     let dayNr = -1;
@@ -202,10 +199,10 @@ const createShortSection = ()=>{
 
 //Kliknięcie na kafelek short
 
-const weatherTileClick = function(e){
+export const weatherTileClick = function(e){
     shortMarked.style.backgroundColor = "rgba(220,170,200, 0.0)";
-    let tileNumer = e.currentTarget.dataset.shortindex;
-    let dataId = data[tileNumer*8].dt;
+    let tNumber = e.currentTarget.dataset.shortindex;
+    let dataId = data[tNumber*8].dt;
     let placeCity=document.getElementById('placeInput').value;
     e.currentTarget.style.backgroundColor = theme.dimness;
     shortMarked = e.currentTarget;
