@@ -1,4 +1,3 @@
-
 let data = [];
 let dataCode = 0;
 function APIRequestByGeoCoordinates(lat, lon) 
@@ -7,8 +6,8 @@ function APIRequestByGeoCoordinates(lat, lon)
     return request;
 }
 function correctPolishLetters (string) {
-    var dict = {'ą':'a','ć':'c','ę':'e','ł':'l','ń':'n','ó':'o','ś':'s','ź':'z','ż':'z'};
-    return string.replace(/[ąćęłńóśźż]/g, match => dict[match]);
+    var dict = {'ą':'a','ć':'c','ę':'e','ł':'l','ń':'n','ó':'o','ś':'s','ź':'z','ż':'z', 'Ą':'A','Ć':'C','Ę':'E','Ł':'L','Ń':'N','Ó':'O', 'Ś':'S','Ź':'Z', 'Ż':'Z'};
+    return string.replace(/[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]/g, match => dict[match]);
   }
 
 function APIRequestByCityName(city)
@@ -33,13 +32,8 @@ async function Getdata(APIpromise){
                 return;   
             }
             if(APIdata !== undefined)
-            {
                 data.push(...APIdata.list);
-                // przykładowe dane do wykresu - Mateusz
-                
-            }
         })
-       
         if(dataCode !== "200")
             return errorMessage;
         return data;
@@ -56,22 +50,5 @@ function ActualDate()
 
 function GetDataForDay(date, table)
 {
-    //d.dt_txt.includes(date)
-    //console.log(table);
-    //console.log(date);
     return table.filter(q => q.dt_txt.includes(date));
 }
-
-
-
- //Getdata(APIRequestByCityName('London'));
-//console.log(data);
-//console.log(data);
-/*let date = new Date();
-console.log(date);
-
-
-
-const d = ActuallDate();
-let dd = GetDataForDay(d, data)*/
-

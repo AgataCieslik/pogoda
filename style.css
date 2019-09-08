@@ -1,12 +1,19 @@
 :root{
-    --bg-color1:rgba(246, 246, 248, 0.5);
+    --bg-color1:rgba(246, 246, 248, 0.6);
     --warn-color:rgba(237, 237, 243, 0.3);
 }
 body{
-    background-image:url("background_sky/afternoon-sky.jpg");
-    background-size:cover;
     font-family:'Open Sans',sans-serif;
     color: black;
+}
+#background{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: fixed;
+    z-index: -1;
 }
 header{
     font-family: 'Cantora One', sans-serif;
@@ -16,6 +23,10 @@ header{
     display:flex;
     justify-content:left;
     padding:1.5em;
+    transition: background-color 0.4s;
+}
+section header:hover{
+    background-color: rgba(220,220,220,0.6);
 }
 section, footer{
     background:var(--bg-color1);
@@ -81,58 +92,58 @@ section{
 .bar.warning{
     padding-bottom:0;
 }
-
-
-
-
-
-
 /* Prognoza ogólna */
-
 .short{
     text-align: center;
     margin: 10px;
     transition: transform 0.5s;
     padding: 5px;
 } 
-
-/* #short th{
-    text-align: left;
-} */
-
+.short:hover{
+    border: 1px solid white;
+    box-shadow: 0 0 3px white;
+    transform: scale(1.09);
+    cursor: pointer;
+}
 .short h5{
     font-family: 'Cantora One', sans-serif;
 }
-
 #forecast h3{
     font-family: 'Cantora One', sans-serif;
 }
-
 .wi{
     font-size: 60px;
     padding: 50px;
-    /* color: white; */
 }
-
 .short .wi{
     font-size: 24px;
     padding: 0;
 }
-
-.short:hover{
+#sliderDiv{
+    display: flex;
     border: 1px solid white;
+    min-width: 200px;
+    max-width: 25%;
+    height: 50px;
     box-shadow: 0 0 3px white;
-    transform: scale(1.02)
+    padding: 5px;
 }
-
-/*ZMIANY Mateusz*/
-
+#hourSlider{
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+}
+#leftArrow, #rightArrow{
+    display: inline-block;
+    height: 100%;
+    width: auto;
+    cursor: pointer;
+}
 .content {
     max-height: 0;
     overflow: hidden;
     transition: 0.3s ease-in-out;
 }
-
 .showHide{
     transition: 0.3s ease-in-out;
 }
@@ -140,24 +151,25 @@ section{
 .showHide.isOpen{
     transform: rotate(180deg);
 }
-
 .hidden{
     display: none;
 }
-
 button:focus{
     outline:0;
 }
-
 canvas{
-    max-width: 60vw;
+    max-width: 80vw;
 }
-
 #weather-info{
     display: none;
     padding:0;
 }
-
 #error-info{
     display:none;
+    text-align: center;
+}
+@media(max-width: 420px){
+    canvas{
+        max-width: 100vw;
+    }
 }

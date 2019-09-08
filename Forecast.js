@@ -1,31 +1,29 @@
-
-
+let shortMarked; // zaznaczony dzieńw prognozie na najb. dni 
 
 //funkcje pomocnicze
+
+const getCurrentHour = async (arr)=>{
+    let currentDate = new Date(arr[0].dt_txt);
+    let currentHour = currentDate.getHours();
+    return currentHour;
+}
 
 const dayName = (dayNr)=>{
     switch(dayNr){
         case 0:
             return 'Niedziela';
-            break;
         case 1:
             return 'Poniedziałek';
-            break;
         case 2:
             return 'Wtorek';
-            break;
         case 3:
             return 'Środa';
-            break;
         case 4:
             return 'Czwartek';
-            break;
         case 5:
             return 'Piątek';
-            break;
         case 6:
             return 'Sobota';
-            break;
     }
 }
 
@@ -33,13 +31,41 @@ const iconUrlfromId = (iconId)=>{
    return `http://openweathermap.org/img/wn/${iconId}@2x.png`
 }
 
+//slider functions
+
+const setSliderAfterTileClick = (e)=>{
+    let weatherSlider = document.getElementById('hourSlider');
+    let currentDate = new Date(data[0].dt_txt)
+    let currentHour = currentDate.getHours();
+    weatherSlider.value = currentHour;
+    tileNumber = e.currentTarget.dataset.shortindex;
+    if (tileNumber == 0){
+        weatherSlider.min = currentHour;
+    }
+    else{
+        weatherSlider.min = 0;
+    }
+    weatherSlider.dataset.tilenumber = tileNumber;
+}
+
+const dataIdfromSlider = ()=>{
+    let slider = document.getElementById('hourSlider');
+    let tileNumer = slider.dataset.tilenumber;
+    let currentHour = (new Date(data[0].dt_txt)).getHours();
+    return data[tileNumer*8+(slider.value-currentHour)/3].dt;
+}
+
+const usingSlider = function(e){
+    let forecastHeader = document.getElementById('detailedHeader');
+    forecastHeader.querySelector('b').innerHTML = `${e.target.value}:00`;
+    createDetailedSection(placeInput.value, dataIdfromSlider());
+}
+
 //utworzenie sekcji DetailedSection
 
 const createDetailedSection = (cityName, dataId)=>{
-    
+    if (cityName === ''){cityName = 'Wrocław'};
     let moment = data.find(el => el.dt === dataId);
-    // console.log('drukuje moment');
-    // console.log(moment);
 
     let detailedForecast = {
         weatherDescription: moment.weather[0].description,
@@ -50,8 +76,6 @@ const createDetailedSection = (cityName, dataId)=>{
         windSpeed: moment.wind.speed,
         clouds: moment.clouds.all,
     }
-
-
 
     let detailDivs = document.querySelectorAll('.detail');
     
@@ -92,9 +116,15 @@ const createDetailedSection = (cityName, dataId)=>{
     </figure>
     `
     let forecastHeader = document.getElementById('detailedHeader');
-    forecastHeader.innerHTML = `Dane dla miasta: ${cityName}     ${moment.dt_txt}`
-}
 
+    let date = new Date(moment.dt_txt);
+    let hour = date.getHours();
+    let day = date.getDate();
+    let month =date.getMonth()+1;
+    if(day<10){day = '0' + day};
+    if(month<10){month = '0' + month}; 
+    forecastHeader.innerHTML = `${cityName}     ${day}.${month}<br>Godzina: <b>${hour}:00</br>`;
+}
 
 //utworzenie sekcji ShortSection
 const createShortSection = ()=>{
@@ -112,23 +142,14 @@ const createShortSection = ()=>{
         else{
             next5days[dayNr].push(data[i]);
         }
-        
         previousMomentDay = currentMomentDay;
-
     }
-    //console.log(next5days);
-    //console.log(next5days.forEach(e=>console.log(e.map(f=>new Date(f.dt_txt).getDate()))))
-
     let shortData = {
         temperature: [],
         pressure: [],
         humidity: [],
         dayDate:[],
     }
-
-    //console.log(data);
-
-
     for(let day of next5days){
         
         shortData.temperature.push(day.reduce((a,b)=>{return a+b.main.temp},0)/day.length);
@@ -141,17 +162,12 @@ const createShortSection = ()=>{
         let month = new Date(day[0].dt_txt).getMonth()+1;
         if(month<10) month = '0' + month;
         
-        shortData.dayDate.push(`${dayName(dayWeek)}<br>${dayMonth}.${month}`)
-        
+        shortData.dayDate.push(`${dayName(dayWeek)}<br>${dayMonth}.${month}`);        
     }
-
-    // console.log(shortData);
 
     for(let factor in shortData){
         if (factor !== 'dayDate') shortData[factor] = shortData[factor].map(el=>el.toFixed(1));
     }
-
-    //console.log(shortData);
     let shortTemperatureTags = document.querySelectorAll('.shortTemperature');
     let shortPressureTags = document.querySelectorAll('.shortPressure');
     let shortHumidityTags = document.querySelectorAll('.shortHumidity');
@@ -159,15 +175,11 @@ const createShortSection = ()=>{
     let shortHeaders = document.querySelectorAll('.shortHeader');
     let shortFigCaptions = document.querySelectorAll('.short figcaption')
 
-    //console.log('shortCaptions');
-    //console.log(shortFigCaptions);
-
     const middleArrEl = (arr)=>{
         if (arr.length%2 === 0) return arr[arr.length/2-1];
         if (arr.length%2 === 1) return arr[(arr.length+1)/2-1];
     }
 
-    //console.log(next5days);
     let imgIds = [];
     let weatherDescriptions = [];
     for (let i=0; i<data.length;i+=8){
@@ -175,42 +187,31 @@ const createShortSection = ()=>{
         weatherDescriptions.push(data[i].weather[0].description);
     }
 
-
-
-    // let imgIds = next5days.map(day=>{
-    //     return middleArrEl(day).weather[0].icon;
-    // })
-
-    //console.log(imgIds);
-
-    // let weatherDescriptions = next5days.map(day=>{
-    //     return middleArrEl(day).weather[0].description;
-    // })
-
-    //console.log(weatherDescriptions);
-
-    for(let i=0; i<5; i++){
+    for(let i=0; i<shortTemperatureTags.length; i++){
         shortTemperatureTags[i].innerHTML = `${shortData.temperature[i]}°C`;
         shortPressureTags[i].innerHTML = `${shortData.pressure[i]}hPa`;
         shortHumidityTags[i].innerHTML = `${shortData.humidity[i]}%`;
         shortHeaders[i].innerHTML = shortData.dayDate[i];
-
         
         shortImages[i].src = iconUrlfromId(imgIds[i]);
         shortFigCaptions[i].innerHTML = weatherDescriptions[i];
     }
-
+    shortMarked = document.querySelector(".short");
+    shortMarked.style.backgroundColor = theme.dimness;
 }
-
 
 //Kliknięcie na kafelek short
 
 const weatherTileClick = function(e){
-    
+    shortMarked.style.backgroundColor = "rgba(220,170,200, 0.0)";
     let tileNumer = e.currentTarget.dataset.shortindex;
     let dataId = data[tileNumer*8].dt;
     let placeCity=document.getElementById('placeInput').value;
-    createDetailedSection(placeCity, dataId)
-    
+    e.currentTarget.style.backgroundColor = theme.dimness;
+    shortMarked = e.currentTarget;
+    createDetailedSection(placeCity, dataId);    
 }
+
+
+
 
