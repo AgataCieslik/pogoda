@@ -176,7 +176,7 @@ button:focus{
 }
 
 canvas{
-    max-width: 60vw;
+    max-width: 80vw;
 }
 
 #weather-info{
@@ -186,4 +186,10 @@ canvas{
 
 #error-info{
     display:none;
+}
+
+@media(max-width: 420px){
+    canvas{
+        max-width: 100vw;
+    }
 }

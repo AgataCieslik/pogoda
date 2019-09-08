@@ -92,25 +92,25 @@ let y =[];
     function CreateCharts(dataList){
         x=[];
         y=[];
-        for(let i=0; i<10; i++){
+        for(let i=0; i<9; i++){
 
-            x.push(dataList[i].dt_txt.substr(0,16));
+            x.push(dataList[i].dt_txt.substr(5,11));
             y.push(dataList[i].main.temp);
         };
         getChart();
 
         x2=[];
         y2=[];
-        for(let i=0; i<10; i++){
-            x2.push(dataList[i].dt_txt.substr(0,16));
+        for(let i=0; i<9; i++){
+            x2.push(dataList[i].dt_txt.substr(5,11));
             y2.push(dataList[i].main.pressure);
         };
         getChart2();
 
         x3=[];
         y3=[];
-        for(let i=0; i<10; i++){
-            x3.push(dataList[i].dt_txt.substr(0,16));
+        for(let i=0; i<9; i++){
+            x3.push(dataList[i].dt_txt.substr(5,11));
             y3.push(dataList[i].main.humidity);
         };
         getChart3();
